@@ -22,5 +22,5 @@ function Generator(attributesArray){
 }
 
 //test
-const card1 = new Card(1,Generator(colorArr),Generator(shapeArr),Generator(numberArr),Generator(shadingArr));
-console.log(card1);
+//const card1 = new Card(1,Generator(colorArr),Generator(shapeArr),Generator(numberArr),Generator(shadingArr));
+//console.log(card1);
