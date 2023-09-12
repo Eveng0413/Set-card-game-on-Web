@@ -2,25 +2,75 @@
 const colorArr = ["red", "green","purple"];
 const shapeArr=["diamond", "oval", "squiggles"];
 const numberArr=[1,2,3];
-const shadingArr=["open","solid","striped"]
+const shadingArr=["open","solid","striped"];
 
 
 //construct the card into object
 function Card(id, color, shape, number,shading){
-    this.id = id;
+    this.id=id;
     this.color=color;
     this.shape=shape;
     this.number=number;
     this.shading =shading;
 }
 
-//generate random attributes for a card
-function Generator(attributesArray){
-    let randomIndex = Math.floor(Math.random() * attributesArray.length);
-    let attribute = attributesArray[randomIndex];
-    return attribute;
+//create a deck for 81 cards
+function generateDeck(){
+    const deck=[];
+    let id = 0;
+    for (let colorIndex = 0; colorIndex < colorArr.length; colorIndex++) {
+        for (let shapeIndex = 0; shapeIndex < shapeArr.length; shapeIndex++) {
+            for (let numberIndex = 0; numberIndex < numberArr.length; numberIndex++) {
+                for (let shadingIndex = 0; shadingIndex < shadingArr.length; shadingIndex++) {
+                    const card = {
+                        id,
+                        color: colorArr[colorIndex],
+                        shape: shapeArr[shapeIndex],
+                        number: numberArr[numberIndex],
+                        shading: shadingArr[shadingIndex],
+                    };
+                    deck.push(card);
+                    id++;
+                }
+            }
+        }
+    }
+
+    return deck;
 }
 
 //test
-const card1 = new Card(1,Generator(colorArr),Generator(shapeArr),Generator(numberArr),Generator(shadingArr));
-console.log(card1);
+const deck=generateDeck();
+console.log(deck);
+
+//shuffle the card
+function shuffle(deck){
+    const shuffledDeck=[...deck];
+    //Fisher-Yates (Knuth) Shuffle
+    for (let i = shuffledDeck.length - 1; i > 0; i--) {
+        const randomIndex = Math.floor(Math.random() * (i + 1));
+        [shuffledDeck[i], shuffledDeck[randomIndex]] = [shuffledDeck[randomIndex], shuffledDeck[i]];
+    }
+    return shuffledDeck;
+}
+
+//test
+const shuffledDeck = shuffle(deck);
+console.log(shuffledDeck);
+
+//generate 12 cards on table
+function onTable(shuffledDeck){
+    const cardsOnTable=[];
+    for(let i=0; i<12; i++){
+        let removedCard=shuffledDeck.shift();
+        cardsOnTable.push(removedCard);
+    }
+    return cardsOnTable;
+}
+
+//test
+const cardsOnTable = onTable(shuffledDeck);
+console.log(cardsOnTable);
+
+
+
