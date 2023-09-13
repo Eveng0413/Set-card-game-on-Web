@@ -40,8 +40,8 @@ function generateDeck(){
 }
 
 //test
-// const deck=generateDeck();
-// console.log(deck);
+const deck=generateDeck();
+console.log(deck);
 
 //shuffle the card
 function shuffle(deck){
@@ -55,8 +55,8 @@ function shuffle(deck){
 }
 
 //test
-// const shuffledDeck = shuffle(deck);
-// console.log(shuffledDeck);
+const shuffledDeck = shuffle(deck);
+console.log(shuffledDeck);
 
 //generate 12 cards on table
 function onTable(shuffledDeck){
@@ -69,37 +69,36 @@ function onTable(shuffledDeck){
 }
 
 //test
-// const cardsOnTable = onTable(shuffledDeck);
-// console.log(cardsOnTable);
+const cardsOnTable = onTable(shuffledDeck);
+console.log(cardsOnTable);
 
 
 // Push 3 new cards after find a set, Note: ensure at least one set on the deck
 function cardReplacing(card1, card2, card3, cardsOnTable, shuffledDeck){
 
-    // find three new cards, Note: ensure at least one set on the deck
-    let temp = cardsOnTable;
+    // store the info
     let checker = False;
+    let indexOf_card1 = cardsOnTable.indexOf(card1);
+    let indexOf_card2 = cardsOnTable.indexOf(card2);
+    let indexOf_card3 = cardsOnTable.indexOf(card3);
 
+    // loop untill there is a set after replacing three new cards into the table
     while (checker) {
+        // three new cards from shuffled deck
         let new_card1 = shuffledDeck.pop();
         let new_card2 = shuffledDeck.pop();
         let new_card3 = shuffledDeck.pop();
 
-        cardsOnTable.splice(temp.indexOf(card1),1,new_card1)
-        cardsOnTable.splice(temp.indexOf(card2),1,new_card2)
-        cardsOnTable.splice(temp.indexOf(card3),1,new_card3)
-        if (findSet(temp)){
+        // replacing them with old three cards
+        cardsOnTable.splice(indexOf_card1, 1, new_card1)
+        cardsOnTable.splice(indexOf_card2, 1, new_card2)
+        cardsOnTable.splice(indexOf_card3, 1, new_card3)
+
+        // if find a set, good. if not, push cards back to end of the shuffled deck 
+        if (findSet(cardsOnTable)){
             checker = True;
         } else {
             shuffledDeck.push(new_card1, new_card2, new_card3);
         }
     }
-    
-
-    if isSet(card1, card2, card3){
-        cardsOnTable.splice(1,1,)
-    }
 }
-
-let card1 = new Card(3,"red","round",1,"stripe");
-console.log(card1);
