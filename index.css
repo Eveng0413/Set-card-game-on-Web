@@ -1,0 +1,137 @@
+body {
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+/*CSS for top bar*/
+.top-bar{
+    top:0;
+    background-color: #333;
+    overflow: hidden;
+    display: flex;
+}
+
+.rule-button-container {
+    flex: 1; /* Make each container take up equal space */
+    text-align: center; /* Center the content of each container */
+    padding: 10px; /* Optional: Add some padding for spacing */
+    border: 1px solid #555; /* Optional: Add a border to visualize the boxes */
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
+}
+
+.centered-button {
+    display: inline-block;
+    padding: 50px 100px;
+    background-color: #007BFF;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.centered-button:hover {
+    background-color: #0056b3;
+}
+
+.scoreboard-container {
+    flex: 1; /* Make each container take up equal space */
+    text-align: center; /* Center the content of each container */
+    padding: 10px; /* Optional: Add some padding for spacing */
+    border: 1px solid #555; /* Optional: Add a border to visualize the boxes */
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
+    color:#f5f5f5;
+  }
+
+.timer-container{
+    flex: 1; /* Make each container take up equal space */
+    text-align: center; /* Center the content of each container */
+    padding: 10px; /* Optional: Add some padding for spacing */
+    border: 1px solid #555; /* Optional: Add a border to visualize the boxes */
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
+}
+
+
+/*CSS for left side bar*/
+.left-sidebar-container{
+    height: 100%;
+    width: 160px;
+    background-color: #111;
+    top: 300px;
+    left: 10px;
+    z-index: 1;
+    padding-top: 20px ;
+    position: absolute;
+    top: 180px;
+}
+
+.left-sidebar-container a{
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #2196F3;
+    display: block;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 30px; /* Add some space between the buttons */
+    background-color: yellow; /* Set the background color to yellow */
+    border-radius: 5px; /* Give it rounded corners */
+   
+    transition: background-color 0.3s; /* Optional: Smooth transition for hover effect */
+}
+
+.scoreboard-container{
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+.rule-button-container{
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+
+/*CSS for card display*/
+.card-display-container {
+    display: flex;
+    /* Positioning */
+    margin-top: 20px; /* Assuming the height of the top-bar is around 60px. Adjust if needed. */
+    margin-left: 170px; /* Width of the left-sidebar-container (160px) + 10px for some spacing. Adjust if needed. */
+
+    /* Width & Height */
+    width: calc(100% - 170px); /* 100% of the viewport width minus the width of the left-sidebar-container and its spacing. */
+    height: calc(100vh - 60px); /* 100% of the viewport height minus the height of the top-bar. */
+
+    /* Other styles */
+    background-color: #1b0606; /* Optional: A light background color for visualization. */
+    overflow: auto; /* To enable scrolling if the content inside exceeds the container's height. */
+    padding: 20px; /* Optional: Some padding for the content inside. */
+    box-sizing: border-box; /* To ensure padding is included in the width and height. */
+    gap:5px;
+}
+.column{
+    display: flex;
+    flex-direction: column; 
+    gap: 10px; 
+    flex:1;
+}
+.column a {
+    flex-grow: 1; 
+    min-height: 100px; 
+    width: 100%; 
+    height: 100px; 
+    background-color: #f5f5f5; 
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    text-decoration: none; 
+    color: #333; 
+}
