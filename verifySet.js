@@ -1,42 +1,63 @@
-
 /**
  * Takes 3 cards and returns whether they are a set or not,
  * according to the rules of the game Set.
  * 
  * @param card1 
- *      array of 4 integers
  * @param card2 
- *      array of 4 integers
  * @param card3 
- *      array of 4 integers
  * @returns boolean isSet
  */
 function verifySet(card1, card2, card3) {
 
     let isSet = true;
 
-    for (let i = 0; i < 4; i++) {
-        if ((card1[i] + card2[i] + card3[i]) % 3 != 0) {
+    //Tests for color
+    if (card1.color == card2.color) { //If 1 and 2 have the same color
+        if (card2.color != card3.color) { //2 must have the same color as 3
+            isSet = false;
+        }
+    } else { //If 1 and 2 have different colors
+        //3's color must be different from 1's and 2's
+        if ((card1.color == card3.color) || (card2.color == card3.color)) { 
             isSet = false;
         }
     }
 
-    return isSet;
+    //Tests for shape
+    if (card1.shape == card2.shape) { //If 1 and 2 have the same shape
+        if (card2.shape != card3.shape) { //2 must have the same shape as 3
+            isSet = false;
+        }
+    } else { //If 1 and 2 have different shapes
+        //3's shape must be different from 1's and 2's
+        if ((card1.shape == card3.shape) || (card2.shape == card3.shape)) { 
+            isSet = false;
+        }
+    }
+
+    //Tests for number
+    if (card1.number == card2.number) { //If 1 and 2 have the same number
+        if (card2.number != card3.number) { //2 must have the same number as 3
+            isSet = false;
+        }
+    } else { //If 1 and 2 have different numbers
+        //3's number must be different from 1's and 2's
+        if ((card1.number == card3.number) || (card2.number == card3.number)) { 
+            isSet = false;
+        }
+    }
+
+    //Tests for shading
+    if (card1.shading == card2.shading) { //If 1 and 2 have the same shading
+        if (card2.shading != card3.shading) { //2 must have the same shading as 3
+            isSet = false;
+        }
+    } else { //If 1 and 2 have different shadings
+        //3's shading must be different from 1's and 2's
+        if ((card1.shading == card3.shading) || (card2.shading == card3.shading)) { 
+            isSet = false;
+        }
+    }
+
+    return (isSet);
 }
- 
-/*
-* TEST CASES
-*/
-// let card1 = [1,0,0,0];
-// let card2 = [1,1,0,0];
-// let card3 = [1,2,0,0];
-
-// console.log("Expectation: true")
-// console.log(verifySet(card1,card2,card3));
-
-// let card4 = [1,0,1,0];
-// let card5 = [1,1,0,0];
-// let card6 = [1,2,0,0];
-
-// console.log("Expectation: false")
-// console.log(verifySet(card4,card5,card6));

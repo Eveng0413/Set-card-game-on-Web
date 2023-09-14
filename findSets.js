@@ -2,7 +2,7 @@
 /** 
  * Finds every set within an array of 12 cards
  * 
- * @param cardArr 
+ * @param(cardsOnTable 
  *      array of 12 cards that are in play,
  *      each card is an array of 4 integers
  * @returns smallArrOfSets
@@ -45,7 +45,7 @@ function findAllSets(cardArr) {
  * Finds 1 set within an array of 12 cards,
  * if a set is not found, returns [-1,-1,-1]
  * 
- * @param cardArr 
+ * @param(cardsOnTable 
  *      array of 12 cards that are in play,
  *      each card is an array of 4 integers
  * 
@@ -70,25 +70,17 @@ function findASet(cardArr) {
     return [-1,-1,-1]
 }
 
-//TEST CASES
-let cardArr = [
-    [0,0,0,1],[0,2,0,0],[0,0,1,2],[2,0,2,0],
-    [2,0,1,2],[1,1,2,0],[1,0,2,0],[0,1,2,1],
-    [2,1,0,0],[2,0,1,0],[1,0,1,2],[0,2,1,1]
-]
-
 //Testing findASet
-let foundSet = findASet(cardArr);
-//console.log(foundSet);
+let foundSet = findASet(cardsOnTable);
 console.log(foundSet[0]);
-console.log(cardArr[foundSet[0]]);
+console.log(cardsOnTable[foundSet[0]]);
 console.log(foundSet[1]);
-console.log(cardArr[foundSet[1]]);
+console.log(cardsOnTable[foundSet[1]]);
 console.log(foundSet[2]);
-console.log(cardArr[foundSet[2]]);
+console.log(cardsOnTable[foundSet[2]]);
 
-console.log(verifySet(cardArr[foundSet[0]], cardArr[foundSet[1]], cardArr[foundSet[2]])); //Must return true
+console.log(verifySet(cardsOnTable[foundSet[0]],cardsOnTable[foundSet[1]],cardsOnTable[foundSet[2]])); //Must return true
 
 //Testing findAllSets
-let arrOfSets = findAllSets(cardArr);
+let arrOfSets = findAllSets(cardsOnTable);
 console.log(arrOfSets);
