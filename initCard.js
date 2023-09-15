@@ -72,5 +72,26 @@ function onTable(shuffledDeck){
 const cardsOnTable = onTable(shuffledDeck);
 console.log(cardsOnTable);
 
+// Display the cards
+//author: Yiheng Zhou
+function displayCards(cardsOnTable) {
+    let gameBoard = document.getElementById('game-board');
+    for (let i = 0; i < cardsOnTable.length; i++) {
+        let cardData = cardsOnTable[i];
+        let card = document.createElement('div');
+        card.className = 'card';
+        // Create a text representing the card attributes
+        let text = document.createElement('p');
+        text.textContent = `${cardData.color} ${cardData.shape} ${cardData.number} ${cardData.shading}`;
+        cards.appendChinld(text);
+        gameBoard.appendChild(card);
+        }
+}
+
+// Call the displayCards function after your card data is ready
+displayCards(cardsOnTable);
+
+
+
 
 
