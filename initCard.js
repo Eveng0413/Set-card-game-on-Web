@@ -89,6 +89,24 @@ function displayCards(cardsOnTable) {
 }
 
 // Call the displayCards function after your card data is ready
+
+function displayCards(cards) {
+    const gameBoard = document.getElementById('game-board');
+    gameBoard.innerHTML = '';  // clear gameBoard
+
+    for (let card of cards) {
+        // create a new div to show cards
+        const cardElement = document.createElement('div');
+        cardElement.className = 'card';
+        
+        
+        // !
+        cardElement.textContent = `Color: ${card.color}, Shape: ${card.shape}, Number: ${card.number}, Shading: ${card.shading}`;
+
+        gameBoard.appendChild(cardElement);
+    }
+}
+
 displayCards(cardsOnTable);
 
 
