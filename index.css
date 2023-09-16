@@ -1,139 +1,125 @@
-body {
+body, html {
+    margin: 0;
+    padding: 0;
     height: 100%;
-    font-family: Arial, sans-serif;
+    font-family: 'Arial, sans-serif';
+    background-color: #FAF3E0; /* Peach background to give a warm undertone to your page */
 }
 
-/*CSS for top bar*/
-.top-bar{
-    top:0;
-    background-color: #333;
-    overflow: hidden;
+.top-bar {
     display: flex;
+    justify-content: space-around;
+    background-color: #1F1F1F; /* Black for the top bar */
+    padding: 20px;
+    position: relative;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
 }
 
-.rule-button-container {
-    flex: 1; /* Make each container take up equal space */
-    text-align: center; /* Center the content of each container */
-    padding: 10px; /* Optional: Add some padding for spacing */
-    border: 1px solid #555; /* Optional: Add a border to visualize the boxes */
-    box-sizing: border-box; /* Ensure padding and border are included in the width */
+.top-title {
+    text-align: center;
+    font-size: 24px; /* Adjust font size as needed */
+    margin-bottom: 10px; /* Space between the title and the iframe */
 }
 
-.centered-button {
-    display: inline-block;
-    padding: 50px 100px;
-    background-color: #007BFF;
-    color: #ffffff;
-    text-decoration: none;
+.scoreboard-container, .timer-container, .rule-button-container {
+    color: #FAF3E0; /* Peach for the text to contrast against the black background */
+    font-size: 20px;
+}
+
+.rule-button-container .centered-button {
+    padding: 10px 50px;
+    background-color: #78C2AD; /* Vibrant teal for the button */
     border-radius: 5px;
-    transition: background-color 0.3s;
+    color: #1F1F1F; /* Black for the button text */
+    transition: background-color 0.3s; /* Smooth transition on hover */
 }
 
-.centered-button:hover {
-    background-color: #0056b3;
+.rule-button-container .centered-button:hover {
+    background-color: #56A08E; /* A darker shade of teal for hover effect */
 }
 
-.scoreboard-container {
-    flex: 1; /* Make each container take up equal space */
-    text-align: center; /* Center the content of each container */
-    padding: 10px; /* Optional: Add some padding for spacing */
-    border: 1px solid #555; /* Optional: Add a border to visualize the boxes */
-    box-sizing: border-box; /* Ensure padding and border are included in the width */
-    color:#f5f5f5;
-  }
-
-.timer-container{
-    flex: 1; /* Make each container take up equal space */
-    text-align: center; /* Center the content of each container */
-    padding: 10px; /* Optional: Add some padding for spacing */
-    border: 1px solid #555; /* Optional: Add a border to visualize the boxes */
-    box-sizing: border-box; /* Ensure padding and border are included in the width */
+.main-content {
+    display: flex;
+    align-items: flex-start; /* This ensures that both children start at the top */
 }
 
-
-/*CSS for left side bar*/
-.left-sidebar-container{
-    height: 100%;
-    width: 160px;
-    background-color: #111;
-    top: 300px;
-    left: 10px;
-    z-index: 1;
-    padding-top: 20px ;
-    position: absolute;
-    top: 180px;
+.left-sidebar-container {
+    margin-top: 30px;
+    background-color: #654321; /* Brown for the sidebar */
+    height: 100vh;;
+    width: 200px;
+    padding: 15px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
-.left-sidebar-container a{
-    padding: 6px 8px 6px 16px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #2196F3;
+.left-sidebar-container a {
     display: block;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-bottom: 30px; /* Add some space between the buttons */
-    background-color: yellow; /* Set the background color to yellow */
-    border-radius: 5px; /* Give it rounded corners */
-   
-    transition: background-color 0.3s; /* Optional: Smooth transition for hover effect */
+    color: #FAF3E0; /* Peach for the text to contrast against the brown background */
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s; /* Smooth transition on hover */
 }
 
-.scoreboard-container{
-    float: left;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-}
-.rule-button-container{
-    float: left;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
+.left-sidebar-container a:hover {
+    background-color: #78C2AD; /* Teal for hover effect */
+    color: #1F1F1F; /* Black for the text to contrast against the teal background */
 }
 
-
-/*CSS for card display*/
 .card-display-container {
-    display: flex;
-    /* Positioning */
-    margin-top: 20px; /* Assuming the height of the top-bar is around 60px. Adjust if needed. */
-    margin-left: 170px; /* Width of the left-sidebar-container (160px) + 10px for some spacing. Adjust if needed. */
-
-    /* Width & Height */
-    width: calc(100% - 170px); /* 100% of the viewport width minus the width of the left-sidebar-container and its spacing. */
-    height: calc(100vh - 60px); /* 100% of the viewport height minus the height of the top-bar. */
-
-    /* Other styles */
-    background-color: #1b0606; /* Optional: A light background color for visualization. */
-    overflow: auto; /* To enable scrolling if the content inside exceeds the container's height. */
-    padding: 20px; /* Optional: Some padding for the content inside. */
-    box-sizing: border-box; /* To ensure padding is included in the width and height. */
-    gap:5px;
+    margin-top: 50px;
+    margin-left: 50px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 10px;
+    height: calc(100vh - 100px);
+    width: calc(100% - 220px);
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
 }
-.column{
+
+.card-box {
+    background-color: #FAEBD7; /* Light peach for the card background */
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    box-sizing: border-box;
     display: flex;
-    flex-direction: column; 
-    gap: 10px; 
-    flex:1;
-}
-.column a {
-    flex-grow: 1; 
-    min-height: 100px; 
-    width: 100%; 
-    height: 100px; 
-    background-color: #f5f5f5; 
-    display: flex; 
     justify-content: center;
     align-items: center;
-    border: 1px solid #ccc; 
-    border-radius: 5px; 
-    text-decoration: none; 
-    color: #333; 
+    font-size: 20px;
+    transition: transform 0.3s; /* Smooth transition for a popping effect on hover */
+}
+
+.card-box:hover {
+    transform: scale(1.05); /* Slightly enlarge the card on hover for a popping effect */
+}
+
+.column {
+    margin: 0 10px;
+    width: calc(33.333% - 20px);
+}
+
+.column a {
+    display: block;
+    margin: 10px 0;
+    padding: 20px;
+    background-color: #D5A58B; /* Brownish peach for column background */
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: calc(50% - 20px);
+    box-sizing: border-box;
+    transition: background-color 0.3s; /* Smooth transition on hover */
+}
+
+.column a:hover {
+    background-color: #B8876E; /* Darker brownish peach for hover effect */
 }
 
 .card {
