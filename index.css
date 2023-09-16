@@ -135,3 +135,9 @@ body {
     text-decoration: none; 
     color: #333; 
 }
+
+.card {
+    width: 80%;
+    height: 150px;
+    border-radius: 5px;
+}
