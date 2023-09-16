@@ -1,46 +1,156 @@
-/*
-In the data structure of each card, we use number reprensentation of each feature:
-    card[0] is the color feature (0 is "red", 1 is "green", 2 is "purple")
-    card[1] is the shape feature (0 is "diamond", 1 is "oval", 2 is "squiggles") 
-    card[3] is the shading feature (0 is "open", 1 is "solid", 2 is "striped")
-    card[2] is the number of shapes (0 is "1 shape", 1 is "2 shapes", 2 is "3 shapes")
-example:
-    card1 = [0,0,1,2]
-    card1[0] is 0 which means the card is red.
-    card1[1] is 0 which means the card is diamond in shape.
-    card1[3] is 1 which means the card is solid within the shape.
-    card1[2] is 2 which means the card is 3 shapes.
-*/
+//initialize the card attributes array
+const colorArr = ["red", "green","purple"];
+const shapeArr=["diamond", "oval", "squiggles"];
+const numberArr=[1,2,3];
+const shadingArr=["open","solid","striped"];
 
-// Jamie's function which verify the set
-function verifySetWithArray(card1, card2, card3) {
+
+//construct the card into object
+function Card(id, color, shape, number,shading){
+    this.id=id;
+    this.color=color;
+    this.shape=shape;
+    this.number=number;
+    this.shading =shading;
+}
+
+//create a deck for 81 cards
+function generateDeck(){
+    const deck=[];
+    let id = 0;
+    for (let colorIndex = 0; colorIndex < colorArr.length; colorIndex++) {
+        for (let shapeIndex = 0; shapeIndex < shapeArr.length; shapeIndex++) {
+            for (let numberIndex = 0; numberIndex < numberArr.length; numberIndex++) {
+                for (let shadingIndex = 0; shadingIndex < shadingArr.length; shadingIndex++) {
+                    const card = {
+                        id,
+                        color: colorArr[colorIndex],
+                        shape: shapeArr[shapeIndex],
+                        number: numberArr[numberIndex],
+                        shading: shadingArr[shadingIndex],
+                    };
+                    deck.push(card);
+                    id++;
+                }
+            }
+        }
+    }
+
+    return deck;
+}
+
+//test
+const deck = generateDeck();
+
+//shuffle the card
+function shuffle(deck){
+    const shuffledDeck=[...deck];
+    //Fisher-Yates (Knuth) Shuffle
+    for (let i = shuffledDeck.length - 1; i > 0; i--) {
+        const randomIndex = Math.floor(Math.random() * (i + 1));
+        [shuffledDeck[i], shuffledDeck[randomIndex]] = [shuffledDeck[randomIndex], shuffledDeck[i]];
+    }
+    return shuffledDeck;
+}
+
+//test
+const shuffledDeck = shuffle(deck);
+
+//generate 12 cards on table
+function onTable(shuffledDeck){
+    const cardsOnTable=[];
+    for(let i=0; i<12; i++){
+        let removedCard=shuffledDeck.shift();
+        cardsOnTable.push(removedCard);
+    }
+    return cardsOnTable;
+}
+
+//test
+const cardsOnTable = onTable(shuffledDeck);
+
+/**
+ * Takes 3 cards and returns whether they are a set or not,
+ * according to the rules of the game Set.
+ * 
+ * @param card1 
+ * @param card2 
+ * @param card3 
+ * @returns boolean isSet
+ */
+function verifySet(card1, card2, card3) {
 
     let isSet = true;
 
-    for (let i = 0; i < 4; i++) {
-        if ((card1[i] + card2[i] + card3[i]) % 3 != 0) {
+    //Tests for color
+    if (card1.color == card2.color) { //If 1 and 2 have the same color
+        if (card2.color != card3.color) { //2 must have the same color as 3
+            isSet = false;
+        }
+    } else { //If 1 and 2 have different colors
+        //3's color must be different from 1's and 2's
+        if ((card1.color == card3.color) || (card2.color == card3.color)) { 
             isSet = false;
         }
     }
 
-    return isSet;
+    //Tests for shape
+    if (card1.shape == card2.shape) { //If 1 and 2 have the same shape
+        if (card2.shape != card3.shape) { //2 must have the same shape as 3
+            isSet = false;
+        }
+    } else { //If 1 and 2 have different shapes
+        //3's shape must be different from 1's and 2's
+        if ((card1.shape == card3.shape) || (card2.shape == card3.shape)) { 
+            isSet = false;
+        }
+    }
+
+    //Tests for number
+    if (card1.number == card2.number) { //If 1 and 2 have the same number
+        if (card2.number != card3.number) { //2 must have the same number as 3
+            isSet = false;
+        }
+    } else { //If 1 and 2 have different numbers
+        //3's number must be different from 1's and 2's
+        if ((card1.number == card3.number) || (card2.number == card3.number)) { 
+            isSet = false;
+        }
+    }
+
+    //Tests for shading
+    if (card1.shading == card2.shading) { //If 1 and 2 have the same shading
+        if (card2.shading != card3.shading) { //2 must have the same shading as 3
+            isSet = false;
+        }
+    } else { //If 1 and 2 have different shadings
+        //3's shading must be different from 1's and 2's
+        if ((card1.shading == card3.shading) || (card2.shading == card3.shading)) { 
+            isSet = false;
+        }
+    }
+
+    return (isSet);
 }
 
 // Find set(s) in a given array of cards
-function findSet(arr) {
+function findSet(arrOfCards) {
     const results = [];
     
     function backtrack(combination, start) {
         if (combination.length === 3) {
-            if (verifySetWithArray(combination[0], combination[1], combination[2])) {
-                indexes = [arr.indexOf(combination[0]), arr.indexOf(combination[1]), arr.indexOf(combination[2])]
-                results.push(indexes);
+            let card1 = combination[0];
+            let card2 = combination[1];
+            let card3 = combination[2];
+            if (verifySet(card1, card2, card3)) {
+                let IDs = [card1.id, card2.id, card3.id]
+                results.push(IDs);
             }
             return;
         }
         
-        for (let i = start; i < arr.length; i++) {
-            combination.push(arr[i]);
+        for (let i = start; i < arrOfCards.length; i++) {
+            combination.push(arrOfCards[i]);
             backtrack(combination, i + 1);
             combination.pop();
         }
@@ -61,7 +171,7 @@ function cardReplacing(card1, card2, card3, cardsOnTable, shuffledDeck){
     let indexOf_card3 = cardsOnTable.indexOf(card3);
 
     // loop untill there is a set after replacing three new cards into the table
-    while (checker != 1) {
+    while (checker == 0) {
         // three new cards from shuffled deck
         let new_card1 = shuffledDeck.pop();
         let new_card2 = shuffledDeck.pop();
@@ -83,63 +193,46 @@ function cardReplacing(card1, card2, card3, cardsOnTable, shuffledDeck){
     }
 }
 
-// Generate radom features for a card
-function generateRandomArray(length) {
-    const array = [];
-    for (let i = 0; i < length; i++) {
-        array.push(Math.floor(Math.random() * 3)); // Generates a random integer between 0 and 2
+// find card by id
+function findByID(id, cards){
+    let result = -1;
+    for (let i = 0; i < cards.length; i++){
+        if (cards[i].id == id){
+            result = i;
+        }
     }
-    return array;
-  }
-
-// Generate number of unique cards stored in a array
-function generateUniqueArrays(count, length) {
-    const uniqueArrays = new Set();
-  
-    while (uniqueArrays.size < count) {
-        const randomArray = generateRandomArray(length);
-        uniqueArrays.add(JSON.stringify(randomArray)); // Using JSON.stringify to ensure uniqueness
-    }
-  
-    return Array.from(uniqueArrays).map((strArray) => JSON.parse(strArray));
-  }
-
-
+    return result;
+}
 
 
 /*
 * TEST CASES
 */
-
-const numberOfCards = 81;
-const numberOfFeatures = 4;
-  
-const shuffledDeck = generateUniqueArrays(numberOfCards, numberOfFeatures);
-
-const cardsOnTable = [];
-for (let i = 0; i < 12; i++){
-    let card = shuffledDeck.pop();
-    cardsOnTable.push(card);
-}
-
 console.log("Cards on the table: \n",cardsOnTable);
 console.log("\nRemaining cards in the pool: ", shuffledDeck.length);
+
 console.log("\n-----------------------------------------------\n");
 
-const combinations = findSet(cardsOnTable);
-console.log("Indexes of sets in above cards: ",combinations);
+const setsID = findSet(cardsOnTable);
+console.log("ID of sets in above cards: ",setsID);
+
 console.log("\n-----------------------------------------------\n");
 
-ind1 = combinations[0][0];
-ind2 = combinations[0][1];
-ind3 = combinations[0][2];
-card1 = cardsOnTable[ind1];
-card2 = cardsOnTable[ind2];
-card3 = cardsOnTable[ind3];
+let ind1 = findByID(setsID[0][0], cardsOnTable);
+let ind2 = findByID(setsID[0][1], cardsOnTable);
+let ind3 = findByID(setsID[0][2], cardsOnTable);
+console.log("Indexes of first set on the table: ", ind1, ind2, ind3)
+let card1 = cardsOnTable[ind1];
+let card2 = cardsOnTable[ind2];
+let card3 = cardsOnTable[ind3];
 console.log("First set: \n",card1);
-console.log(card2);
-console.log(card3);
+console.log("\n",card2);
+console.log("\n",card3);
+
+console.log("\n-----------------------------------------------\n");
+
 cardReplacing(card1, card2, card3, cardsOnTable, shuffledDeck);
+
 console.log("\n-----------------------------------------------\n");
 
 console.log("Cards on the table after replacing: \n",cardsOnTable);
