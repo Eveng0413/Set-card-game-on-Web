@@ -1,5 +1,5 @@
 //initialize the card attributes array
-const colorArr = ["red", "green","purple"];
+const colorArr = ["blue", "green","purple"];
 const shapeArr=["diamond", "oval", "squiggles"];
 const numberArr=[1,2,3];
 const shadingArr=["open","solid","striped"];
@@ -58,19 +58,24 @@ function shuffle(deck){
 const shuffledDeck = shuffle(deck);
 console.log(shuffledDeck);
 
-//generate 12 cards on table
-function onTable(shuffledDeck){
-    const cardsOnTable=[];
-    for(let i=0; i<12; i++){
-        let removedCard=shuffledDeck.shift();
-        cardsOnTable.push(removedCard);
-    }
-    return cardsOnTable;
+function displayCards(deck) {
+    const cardSlots = document.querySelectorAll('.column a');
+
+    deck.forEach((card, index) => {
+        const img = document.createElement('img');
+
+        img.src = `picture/${card.color}-${card.shape}-${card.number}-${card.shading}.jpg`;
+        img.alt = `Card ${index + 1}`;
+        img.classList.add('card');
+
+        cardSlots[index].appendChild(img);
+    });
 }
 
-//test
-const cardsOnTable = onTable(shuffledDeck);
-console.log(cardsOnTable);
-
+window.onload = function() {
+  const deck = generateDeck();
+  const shuffledDeck = shuffle(deck);
+  displayCards(shuffledDeck);
+};
 
 

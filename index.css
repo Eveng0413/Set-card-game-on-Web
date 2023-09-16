@@ -121,3 +121,9 @@ body, html {
 .column a:hover {
     background-color: #B8876E; /* Darker brownish peach for hover effect */
 }
+
+.card {
+    width: 80%;
+    height: 150px;
+    border-radius: 5px;
+}
