@@ -72,42 +72,6 @@ function onTable(shuffledDeck){
 const cardsOnTable = onTable(shuffledDeck);
 console.log(cardsOnTable);
 
-// Display the cards
-//author: Yiheng Zhou
-function displayCards(cardsOnTable) {
-    let gameBoard = document.getElementById('game-board');
-    for (let i = 0; i < cardsOnTable.length; i++) {
-        let cardData = cardsOnTable[i];
-        let card = document.createElement('div');
-        card.className = 'card';
-        // Create a text representing the card attributes
-        let text = document.createElement('p');
-        text.textContent = `${cardData.color} ${cardData.shape} ${cardData.number} ${cardData.shading}`;
-        cards.appendChinld(text);
-        gameBoard.appendChild(card);
-        }
-}
-
-// Call the displayCards function after your card data is ready
-
-function displayCards(cards) {
-    const gameBoard = document.getElementById('game-board');
-    gameBoard.innerHTML = '';  // clear gameBoard
-
-    for (let card of cards) {
-        // create a new div to show cards
-        const cardElement = document.createElement('div');
-        cardElement.className = 'card';
-        
-        
-        // !
-        cardElement.textContent = `Color: ${card.color}, Shape: ${card.shape}, Number: ${card.number}, Shading: ${card.shading}`;
-
-        gameBoard.appendChild(cardElement);
-    }
-}
-
-displayCards(cardsOnTable);
 
 
 
