@@ -59,7 +59,7 @@ const shuffledDeck = shuffle(deck);
 console.log(shuffledDeck);
 
 function displayCards(deck) {
-    const cardSlots = document.querySelectorAll('.column a');
+    const cardSlots = document.querySelectorAll('.card-box');
 
     deck.forEach((card, index) => {
         const img = document.createElement('img');
