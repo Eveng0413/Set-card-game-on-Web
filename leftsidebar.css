@@ -1,0 +1,29 @@
+.left-sidebar-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Spacing between buttons */
+    width: 200px; /* Adjust as needed */
+    padding: 10px;
+    background-color: #f5f5f5; /* Light gray background for the container */
+    border-radius: 8px;
+}
+
+.left-sidebar-container button {
+    padding: 10px 15px;
+    font-size: 16px;
+    color: #ffffff; /* White text color */
+    background-color: #007BFF; /* Primary blue color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.left-sidebar-container button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.left-sidebar-container button:focus {
+    outline: none; /* Remove default focus outline */
+    box-shadow: 0 0 5px rgba(0,123,255,0.5); /* Add a subtle glow effect on focus */
+}
