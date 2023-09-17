@@ -68,6 +68,25 @@ body, html {
     color: #1F1F1F; /* Black for the text to contrast against the teal background */
 }
 
+.result{
+    margin-top: 50px;
+    margin-left: 250px;
+    height: 100px;
+    width: calc(100% - 220px);
+    position: absolute;
+    z-index: 2;
+}
+
+#resultText{
+    color: red;
+    font-size: 50px;
+}
+
+.selected{
+    background-color: red;
+}
+
+
 .card-display-container {
     margin-top: 50px;
     margin-left: 50px;
