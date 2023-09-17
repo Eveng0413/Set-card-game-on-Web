@@ -53,14 +53,36 @@ function shuffle(deck){
     }
     return shuffledDeck;
 }
+//generate 12 cards on table
+function onTable(shuffledDeck){
+    const cardsOnTable=[];
+    for(let i=0; i<12; i++){
+        let removedCard=shuffledDeck.shift();
+        cardsOnTable.push(removedCard);
+    }
+    return cardsOnTable;
+}
 
 //test
 const shuffledDeck = shuffle(deck);
 console.log(shuffledDeck);
 
+//generate 12 cards on table
+function onTable(shuffledDeck){
+    const cardsOnTable=[];
+    for(let i=0; i<12; i++){
+        let removedCard=shuffledDeck.shift();
+        cardsOnTable.push(removedCard);
+    }
+    return cardsOnTable;
+}
+
 function displayCards(deck) {
     const cardSlots = document.querySelectorAll('.column a');
 
+//test
+const cardsOnTable = onTable(shuffledDeck);
+console.log(cardsOnTable);
     deck.forEach((card, index) => {
         const img = document.createElement('img');
 
