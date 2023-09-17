@@ -54,18 +54,26 @@ body, html {
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
-.left-sidebar-container a {
-    display: block;
-    color: #FAF3E0; /* Peach for the text to contrast against the brown background */
-    margin-bottom: 15px;
-    padding: 10px;
+
+.left-sidebar-container button {
+    margin-bottom: 10px;
+    padding: 10px 15px;
+    font-size: 16px;
+    color: #ffffff; /* White text color */
+    background-color: burlywood; /* Primary blue color */
+    border: none;
     border-radius: 5px;
-    transition: background-color 0.3s; /* Smooth transition on hover */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
 }
 
-.left-sidebar-container a:hover {
-    background-color: #78C2AD; /* Teal for hover effect */
-    color: #1F1F1F; /* Black for the text to contrast against the teal background */
+.left-sidebar-container button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.left-sidebar-container button:focus {
+    outline: none; /* Remove default focus outline */
+    box-shadow: 0 0 5px rgba(0,123,255,0.5); /* Add a subtle glow effect on focus */
 }
 
 .card-display-container {
@@ -98,28 +106,6 @@ body, html {
 
 .card-box:hover {
     transform: scale(1.05); /* Slightly enlarge the card on hover for a popping effect */
-}
-
-.column {
-    margin: 0 10px;
-    width: calc(33.333% - 20px);
-}
-
-.column a {
-    display: block;
-    margin: 10px 0;
-    padding: 20px;
-    background-color: #D5A58B; /* Brownish peach for column background */
-    text-align: center;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    height: calc(50% - 20px);
-    box-sizing: border-box;
-    transition: background-color 0.3s; /* Smooth transition on hover */
-}
-
-.column a:hover {
-    background-color: #B8876E; /* Darker brownish peach for hover effect */
 }
 
 .card {
