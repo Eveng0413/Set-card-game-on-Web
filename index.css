@@ -82,8 +82,23 @@ body, html {
     font-size: 50px;
 }
 
-.selected{
-    background-color: red;
+/*add for selection*/
+.selected::before {
+    content: ''; /* Required for pseudo-elements */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 0, 0, 0); /* Initially transparent */
+    opacity: 0; /* Initially, make it completely transparent */
+    transition: opacity 0.3s, background-color 0.3s; /* Add transitions for a smooth effect */
+    z-index: 2; /* Higher z-index value to appear on top of card-box */
+}
+
+.selected:hover::before {
+    background-color: rgba(255, 0, 0, 0.5); /* Transparent red (adjust the alpha value for the desired transparency) */
+    opacity: 1; /* On hover, make the overlay fully visible */
 }
 
 
@@ -102,6 +117,7 @@ body, html {
 }
 
 .card-box {
+    position: relative;
     background-color: #FAEBD7; /* Light peach for the card background */
     text-align: center;
     border: 1px solid #ccc;
@@ -113,6 +129,7 @@ body, html {
     align-items: center;
     font-size: 20px;
     transition: transform 0.3s; /* Smooth transition for a popping effect on hover */
+    z-index: 1;
 }
 
 .card-box:hover {

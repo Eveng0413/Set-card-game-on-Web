@@ -1,3 +1,19 @@
+// import function
+//import { displayScore } from './ScoreBoard.js';
+//please remove the following the following and replace with import statement if your brower support ES6 modules
+document.addEventListener('DOMContentLoaded', function () {
+    //Variable created to get value of the id 
+    var scoreBox = document.getElementById('scoreNum');
+    function displayScore(scoreNum) {
+      //Sets score based on scoreNum Value
+      scoreBox.textContent = scoreNum;
+    }
+    //for testing
+    //console.log(displayScore(90));
+    displayScore(0);
+  });
+  
+
 //initialize the card attributes array
 const colorArr = ["blue", "green","purple"];
 const shapeArr=["diamond", "oval", "squiggles"];
@@ -120,13 +136,6 @@ function displayCards(cardsOnTable) {
     // });
 };
 
-window.onload = function() {
-  const deck = generateDeck();
-  const shuffledDeck = shuffle(deck);
-  let cardsOnTable = onTable(shuffledDeck);
-  printCardsInfo(cardsOnTable);
-  displayCards(cardsOnTable);
-};
 
 /**
  * Takes 3 cards and returns whether they are a set or not,
@@ -192,48 +201,78 @@ function verifySet(card1, card2, card3) {
     return (isSet);
 }
 
-//WAITING FIX:
-//Even: add the clickListener for the cards to connect verifySet function with the html
-const cards = document.querySelectorAll('.card-box');
-let resultText=document.getElementById('resultText');
-let userSelected=[];
 
-cards.forEach(function(card){
-    card.addEventListener('click',function(){
-        //toggle between selected and not selected
-        card.classList.toggle('selected');
-        const cardId = card.getAttribute('id');
+window.onload = function() {
+    const deck = generateDeck();
+    const shuffledDeck = shuffle(deck);
+    let cardsOnTable = onTable(shuffledDeck);
+    printCardsInfo(cardsOnTable);
+    displayCards(cardsOnTable);
 
-        //check if userSelected contained the newly clicked obj
-        const index = userSelected.findIndex(function(obj) {
-            return obj.id === cardId;
-        });
-
-        if(index<0){
-            userSelected.push(card);
-            console.log(userSelected);
-        }else{
-            userSelected.splice(index, 1);
-            console.log(userSelected);
-        }
-
-        //if user selected 3
-        if(userSelected.length === 3){
-            //FIXME: verifySet takes objects
-            console.log(userSelected);
-            const isSet = verifySet(userSelected[0],userSelected[1],userSelected[2]);
-            resultText.textContent = isSet ? 'Yes' : 'No';
-            clearSelection();
-            console.log(userSelected);
-        }
-    });   
-});
-
-//clear selection
-function clearSelection() {
-    cards.forEach(function(card) {
-        card.classList.remove('selected');
-    });
-    userSelected = [];
+    setupClickListeners(cardsOnTable);
 };
+
+
+//add the clickListener for the cards to connect verifySet function with the html
+
+function setupClickListeners(cardsOnTable) {
+    const cards = document.querySelectorAll('.card-box');
+    let resultText=document.getElementById('resultText');
+    let userSelected=[];
+
+    cards.forEach(function(card){
+        card.addEventListener('click',function(){
+            //add the score board
+            // Initialize the score to 0
+            let scoreNum = 0; 
+
+            //link the card with id
+            const cardId = card.getAttribute('id');
+
+            // Check if the card is already selected
+            const isSelected = card.classList.contains('selected');
+
+            if (isSelected) {
+                // Card is already selected, unselect it
+                card.classList.remove('selected');
+                // Remove the card from the userSelected array
+                userSelected = userSelected.filter((selectedCard) => selectedCard.id !== cardId);
+                console.log(userSelected);
+            } else {
+                // Card is not selected, select it and add it to the userSelected array
+                card.classList.add('selected');
+                const clickedCard = cardsOnTable.find(function(card) {
+                    return card.id === parseInt(cardId);
+                });
+                userSelected.push(clickedCard);
+                console.log(userSelected);
+            }
+    
+            //if user selected 3
+            if(userSelected.length === 3){
+                //check if it is a set
+                const isSet = verifySet(userSelected[0], userSelected[1], userSelected[2]);
+                resultText.textContent = isSet ? 'Yes, it is a set!' : 'No, it is not a set!';
+                scoreNum=2;
+
+                //if it is not, promoted to restart the game
+                if (!isSet) {
+                    resultText.textContent += ' Click a card to restart the game.';
+                    displayScore(scoreNum);
+                }else{
+                    scoreNum +=1;
+                    displayScore(scoreNum);
+                }
+
+                //clear the selection
+                cards.forEach(function(card) {
+                    card.classList.remove('selected');
+                });
+                userSelected.length=0;
+                console.log(userSelected);
+            };
+        });   
+    });
+};
+
 
