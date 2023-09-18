@@ -253,12 +253,12 @@ function setupClickListeners(cardsOnTable) {
                 //check if it is a set
                 const isSet = verifySet(userSelected[0], userSelected[1], userSelected[2]);
                 resultText.textContent = isSet ? 'Yes, it is a set!' : 'No, it is not a set!';
-                scoreNum=2;
+                //scoreNum=2;
 
                 //if it is not, promoted to restart the game
                 if (!isSet) {
                     resultText.textContent += ' Click a card to restart the game.';
-                    displayScore(scoreNum);
+                    //displayScore(scoreNum);
                 }else{
                     scoreNum +=1;
                     displayScore(scoreNum);
