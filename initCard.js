@@ -58,6 +58,42 @@ function shuffle(deck){
 const shuffledDeck = shuffle(deck);
 console.log(shuffledDeck);
 
+//generate 12 cards on table
+function onTable(shuffledDeck){
+    const cardsOnTable=[];
+    for(let i=0; i<12; i++){
+        let removedCard=shuffledDeck.shift();
+        cardsOnTable.push(removedCard);
+    }
+    return cardsOnTable;
+}
+
+//test
+const cardsOnTable = onTable(shuffledDeck);
+console.log(cardsOnTable);
+
+=======
+}
+
+//test
+const deck=generateDeck();
+console.log(deck);
+
+//shuffle the card
+function shuffle(deck){
+    const shuffledDeck=[...deck];
+    //Fisher-Yates (Knuth) Shuffle
+    for (let i = shuffledDeck.length - 1; i > 0; i--) {
+        const randomIndex = Math.floor(Math.random() * (i + 1));
+        [shuffledDeck[i], shuffledDeck[randomIndex]] = [shuffledDeck[randomIndex], shuffledDeck[i]];
+    }
+    return shuffledDeck;
+}
+
+//test
+const shuffledDeck = shuffle(deck);
+console.log(shuffledDeck);
+
 function displayCards(deck) {
     const cardSlots = document.querySelectorAll('.card-box');
 
