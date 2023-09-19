@@ -9,6 +9,10 @@ document.addEventListener('DOMContentLoaded', function () {
       scoreBox.textContent = scoreNum;
     }
     //for testing
-    console.log(displayScore(90));
+    //console.log(displayScore(90));
+    displayScore(0);
   });
+  
+  //please uncomment out the export statement if your brower support ES6 modules
+  //export {displayScore};
   
