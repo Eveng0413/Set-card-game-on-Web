@@ -72,7 +72,12 @@ function onTable(shuffledDeck){
 const cardsOnTable = onTable(shuffledDeck);
 console.log(cardsOnTable);
 
-=======
+}
+
+//test
+const cardsOnTable = onTable(shuffledDeck);
+console.log(cardsOnTable);
+
 }
 
 //test
