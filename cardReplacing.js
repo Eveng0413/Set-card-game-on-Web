@@ -5,7 +5,7 @@ import { verifySet } from './verifySet.js';
  * 
  * @param arrOfCards 
  *          Array of cards which may or may not contain set(s)
- * @returns results[][]
+ * @returns int results[][]
  *          Arrays of IDs for each set 
  *          (ie. Assume card1, card2, and card3 with IDs 72, 40, and 8
  *          in array of cards are a set. The result = [[72,40,8]])
