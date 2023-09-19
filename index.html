@@ -4,11 +4,21 @@
     <title>Home Page of Set</title>
     <link rel="stylesheet" href="index.css">
 
+
     <script src="initCard.js"></script> 
     <script src="ScoreBoard.js"></script> 
 
+
+    <link rel="stylesheet" href="leftsidebar.css">
+    <script src="initCard.js"></script> 
+
 </head>
 <body>
+    <h1>Test</h1>
+    <script src="initCard.js" async></script>
+    <script src="verifySet.js" async></script>
+    <script src="findSets.js" async></script>
+</body>
     <div class="top-bar">
         <div class="scoreboard-container">
             <div class="top-title">Scoreboard</div>
@@ -25,9 +35,9 @@
 
     <div class="main-content">
         <div class="left-sidebar-container">
-            <a href="#Multiplayer">Multiplayer</a>
-            <a href="#New Game">New Game</a>
-            <a href="#Find Set">Find Set</a>
+            <button onclick="location.href='#Multiplayer'">Multiplayer</button>
+            <button onclick="location.href='#New Game'">New Game</button>
+            <button onclick="location.href='#Find Set'">Find Set</button>
         </div>
         <div class="result"> <span id="resultText"></span></div>
         <div class="card-display-container">
