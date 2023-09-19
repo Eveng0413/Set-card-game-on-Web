@@ -1,11 +1,20 @@
 
-/*Current Problem
-1. Faied to call displayScore. Alaways return error message cannot find "scoreNum". May caused by iframe in html/Or the order to load DOM.
-2.
+/*Current problems
+1. Once card is clicked. It should  be shown as selected. However currently it only shown as selected when clicking
+2. Game will end after 3 cards is selected. It should continue before time = 0
+3. Rules page need styling. And a return button should be added.
 */
 
 import { findSet, cardReplacing } from './cardReplacing.js';
 import { verifySet } from './verifySet.js';
+import { message } from './message.js';
+import { displayScore } from './ScoreBoard.js';
+
+//Set up message and scoreboard
+let text = "try your best to find sets!";
+message(text);
+displayScore(0);
+
 
 //initialize the card attributes array
 const colorArr = ["blue", "green", "purple"];
@@ -151,7 +160,6 @@ window.onload = function () {
 
 function setupClickListeners(cardsOnTable) {
     const cards = document.querySelectorAll('.card-box');
-    let resultText = document.getElementById('resultText');
     let userSelected = [];
 
     cards.forEach(function (card) {
@@ -186,16 +194,18 @@ function setupClickListeners(cardsOnTable) {
             if (userSelected.length === 3) {
                 //check if it is a set
                 const isSet = verifySet(userSelected[0], userSelected[1], userSelected[2]);
-                resultText.textContent = isSet ? 'Yes, it is a set!' : 'No, it is not a set!';
+                text = isSet ? 'Yes, it is a set!' : 'No, it is not a set!';
+                message(text);
                 //scoreNum=2;
 
                 //if it is not, promoted to restart the game
                 if (!isSet) {
-                    resultText.textContent += ' Click a card to restart the game.';
-                    //displayScore(10);   //These displayScore function cannot work.
+                    text += ' Click a card to restart the game.';
+                    message(text);
+                    displayScore(10);   //These displayScore function cannot work.
                 } else {
                     scoreNum += 1;
-                    //displayScore(scoreNum);
+                    displayScore(scoreNum);
                     if (shuffledDeck.length === 0) {
                         console.log("There is no card in shuffledDeck");
                     } else {
