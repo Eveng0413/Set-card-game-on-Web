@@ -1,7 +1,5 @@
 let timerBox = document.querySelector(".timer-box");
 let pauseResumeBtn = document.getElementById("pause-resume");
-let resetBtn = document.getElementById("reset");
-
 let totalSeconds = 5 * 60; // 5 minutes in seconds
 let isPaused = false;
 
@@ -32,9 +30,3 @@ pauseResumeBtn.addEventListener("click", function() {
     pauseResumeBtn.textContent = isPaused ? 'Continue' : 'Pause';
 });
 
-resetBtn.addEventListener("click", function() {
-    totalSeconds = 5 * 60;
-    isPaused = false;
-    pauseResumeBtn.textContent = 'Pause';
-    updateDisplay();
-});
