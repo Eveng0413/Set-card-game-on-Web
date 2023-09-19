@@ -68,17 +68,13 @@ function onTable(shuffledDeck){
     return cardsOnTable;
 }
 
-//test
-const cardsOnTable = onTable(shuffledDeck);
-console.log(cardsOnTable);
 
-}
 
 //test
 const cardsOnTable = onTable(shuffledDeck);
 console.log(cardsOnTable);
 
-}
+
 
 //test
 const deck=generateDeck();
