@@ -7,7 +7,7 @@
  * @param card3 
  * @returns boolean isSet
  */
-function verifySet(card1, card2, card3) {
+export function verifySet(card1, card2, card3) {
 
     let isSet = true;
 

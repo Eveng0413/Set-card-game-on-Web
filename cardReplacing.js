@@ -1,4 +1,4 @@
-import { verifySet } from './verifySet.js';
+import {verifySet} from './verifySet.js'
 
 /**
  * Find set(s) in a given array of cards
@@ -10,7 +10,7 @@ import { verifySet } from './verifySet.js';
  *          (ie. Assume card1, card2, and card3 with IDs 72, 40, and 8
  *          in array of cards are a set. The result = [[72,40,8]])
  */
-function findSet(arrOfCards) {
+export function findSet(arrOfCards) {
     const results = [];
     
     function backtrack(combination, start) {
@@ -52,7 +52,7 @@ function findSet(arrOfCards) {
  * @post_condition
  *          3 new cards replaced on the table AND there is at least one set on the table
  */
-function cardReplacing(card1, card2, card3, cardsOnTable, shuffledDeck){
+export function cardReplacing(card1, card2, card3, cardsOnTable, shuffledDeck){
 
     // store the info
     let checker = 0;
@@ -82,7 +82,6 @@ function cardReplacing(card1, card2, card3, cardsOnTable, shuffledDeck){
         }
     }
 }
-
 /**
  * Find card by id
  * 
@@ -93,7 +92,7 @@ function cardReplacing(card1, card2, card3, cardsOnTable, shuffledDeck){
  * @returns int result
  *          return the index of the card in {cards}
  */
-function findByID(id, cards){
+export function findByID(id, cards){
     let result = -1;
     for (let i = 0; i < cards.length; i++){
         if (cards[i].id == id){
@@ -102,5 +101,3 @@ function findByID(id, cards){
     }
     return result;
 }
-
-
