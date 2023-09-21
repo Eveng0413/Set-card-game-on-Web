@@ -1,9 +1,9 @@
-import { message } from "./message";
-
+import { message } from "./message.js";
+import { scores } from "./initCard.js";
 let timerBox = document.querySelector(".timer-box");
 let pauseResumeBtn = document.getElementById("PauseGame");
 let startBtn = document.getElementById("StartGame"); // Get the start button
-let totalSeconds = 3*60; // 3 minutes in seconds
+let totalSeconds = 3; // 3 minutes in seconds
 let isPaused = false;
 let timeIsup = false;
 
@@ -25,6 +25,7 @@ startBtn.addEventListener("click", function() {
             if (!isPaused) {
                 if (totalSeconds <= 0) {
                     clearInterval(interval);
+                    message("Time Is Up. Nice work you find " + scores + " sets");
                     timeIsup = true;
                     return;
                 }

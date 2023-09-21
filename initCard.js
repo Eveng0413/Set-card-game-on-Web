@@ -243,4 +243,4 @@ function setupClickListeners(cardsOnTable, shuffledDeck, scoreNum) {
     });
 };
 
-
+export const scores = scoreNum;
