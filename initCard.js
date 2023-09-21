@@ -80,23 +80,25 @@ function shuffle(deck) {
 //generate 12 cards on table
 function onTable(shuffledDeck) {
     let cardsOnTable = [];
-    let hasSet = false;
+    let set = [];
+    let setFlag = false;
     let hint = [];
-    while (!hasSet) {
+    while (!setFlag) {
         cardsOnTable = [];
         for (let i = 0; i < 12; i++) {
             let removedCard = shuffledDeck.shift();
             cardsOnTable.push(removedCard);
         };
-        hasSet = findSet(cardsOnTable);
-        if (!hasSet) {
+        set = findSet(cardsOnTable);
+        if (set.length != 0) {
+            setFlag = true;
+        } else {
             while (cardsOnTable.length > 0) {
                 shuffledDeck.push(cardsOnTable.pop());
             }
-        } else {
             //Can be used for print hint 
-            console.log(hasSet);
         }
+        console.log(set);
     }
     console.log(cardsOnTable);
     return cardsOnTable;
