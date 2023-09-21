@@ -177,7 +177,8 @@ function setupClickListeners(cardsOnTable, shuffledDeck, scoreNum) {
 
             // Check if the card is already selected
             let isSelected = card.classList.contains('selected');
-
+            
+            message("Click a card to continue");
             if (isSelected) {
                 // Card is already selected, unselect it
                 card.classList.remove('selected');
