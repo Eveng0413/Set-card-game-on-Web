@@ -134,34 +134,36 @@ window.onload = function () {
     const deck = generateDeck();
     const shuffledDeck = shuffle(deck);
     let cardsOnTable = onTable(shuffledDeck);
-    //let startBtn = document.getElementById("StartGame");
+    let startBtn = document.getElementById("StartGame");
 
-    // startBtn.addEventListener("click", function() {
-    //     gameIsActive = true;
-    //     startGame(cardsOnTable);
-    // });
+    startBtn.addEventListener("click", function() {
+        gameIsActive = true;
+        if(gameIsActive == true){
+            setupClickListeners(cardsOnTable, shuffledDeck, scoreNum);
+        }     
+    });
 
 
     //printCardsInfo(cardsOnTable);
     displayCards(cardsOnTable);
-    setupClickListeners(cardsOnTable,shuffledDeck,scoreNum);
+    
     //Set up message and scoreboard
     let text = "try your best to find sets!";
     message(text);
     displayScore(scoreNum);
 };
 
-function updatePage(scoreNum,cardsOnTable){
-    displayScore(scoreNum);
-    if(oldScore<scoreNum){
-        cardClickHandler(cardsOnTable)
-        oldScore=scoreNum;
-    }
-}
+// function updatePage(scoreNum,cardsOnTable){
+//     displayScore(scoreNum);
+//     if(oldScore<scoreNum){
+//         cardClickHandler(cardsOnTable)
+//         oldScore=scoreNum;
+//     }
+// }
 
-function setupClickListeners(cardsOnTable,shuffledDeck,scoreNum) {
+function setupClickListeners(cardsOnTable, shuffledDeck, scoreNum) {
     const cards = document.querySelectorAll('.card-box');
-    let userSelected = [];   
+    let userSelected = [];
     let temp;
     cards.forEach(function (card) {
         card.addEventListener('click', function () {
@@ -179,7 +181,7 @@ function setupClickListeners(cardsOnTable,shuffledDeck,scoreNum) {
                 userSelected = userSelected.filter((selectedCard) => selectedCard.id != cardId);
 
                 //console.log(userSelected);
-                
+
             } else {
                 // Card is not selected, select it and add it to the userSelected array
                 card.classList.add('selected');
@@ -202,6 +204,7 @@ function setupClickListeners(cardsOnTable,shuffledDeck,scoreNum) {
                 //if it is not, promoted to restart the game
                 if (!isSet) {
                     displayScore(scoreNum);   //These displayScore function cannot work.
+                    userSelected = [];
                 } else {
                     scoreNum += 1;
                     console.log(scoreNum);
@@ -209,13 +212,16 @@ function setupClickListeners(cardsOnTable,shuffledDeck,scoreNum) {
                     if (shuffledDeck.length === 0) {
                         console.log("There is no card in shuffledDeck");
                     } else {
+                        cards.forEach(function (card) {
+                            card.removeEventListener;
+                        });
                         //Replace cards
                         cardReplacing(userSelected[0], userSelected[1], userSelected[2], cardsOnTable, shuffledDeck);
                         cardId = card.getAttribute('id');
                         displayCards(cardsOnTable);
 
-                        
-                        setupClickListeners(cardsOnTable,shuffledDeck,scoreNum);
+
+                        setupClickListeners(cardsOnTable, shuffledDeck, scoreNum);
 
                         //cheating
                         console.log(findSet(cardsOnTable));
@@ -230,6 +236,7 @@ function setupClickListeners(cardsOnTable,shuffledDeck,scoreNum) {
 
                 //console.log(userSelected);
             };
+            console.log(userSelected);
         });
     });
 };
