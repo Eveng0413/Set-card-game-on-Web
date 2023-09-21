@@ -1,7 +1,9 @@
 let timerBox = document.querySelector(".timer-box");
-let pauseResumeBtn = document.getElementById("pause-resume");
-let totalSeconds = 5 * 60; // 5 minutes in seconds
+let pauseResumeBtn = document.getElementById("PauseGame");
+let startBtn = document.getElementById("StartGame"); // Get the start button
+let totalSeconds = 3 * 60; // 5 minutes in seconds
 let isPaused = false;
+let timeIsup = false;
 
 function updateDisplay() {
     let hours = Math.floor(totalSeconds / 3600);
@@ -13,20 +15,34 @@ function updateDisplay() {
                            (seconds < 10 ? '0' + seconds : seconds);
 }
 
-let interval = setInterval(function() {
-    if (!isPaused) {
-        if (totalSeconds <= 0) {
-            clearInterval(interval);
-            alert('Time is up!');
-            return;
-        }
-        totalSeconds--;
-        updateDisplay();
+let interval;
+
+startBtn.addEventListener("click", function() {
+    if (!interval) { // Check if interval is not already set
+        isPaused = false; // Start the timer
+        interval = setInterval(function() {
+            if (!isPaused) {
+                if (totalSeconds <= 0) {
+                    clearInterval(interval);
+                    timeIsup = true;
+                    return;
+                }
+                totalSeconds--;
+                updateDisplay();
+            }
+        }, 1000);
+        startBtn.disabled = true; // Disable the start button to prevent starting multiple intervals
     }
-}, 1000);
+});
 
 pauseResumeBtn.addEventListener("click", function() {
     isPaused = !isPaused;
-    pauseResumeBtn.textContent = isPaused ? 'Continue' : 'Pause';
+    pauseResumeBtn.textContent = isPaused ? 'Continue Game' : 'Pause Game';
 });
+
+ export function isTimeUp() {
+     return timeIsUp;
+ }
+
+
 
