@@ -141,7 +141,7 @@ window.onload = function () {
     startBtn.addEventListener("click", function() {
         gameIsActive = true;
         if(gameIsActive == true){
-            setupClickListeners(cardsOnTable, shuffledDeck, scoreNum);
+            startGameLoop(cardsOnTable, shuffledDeck, scoreNum);
         }     
     });
 
@@ -155,13 +155,15 @@ window.onload = function () {
     displayScore(scoreNum);
 };
 
-// function updatePage(scoreNum,cardsOnTable){
-//     displayScore(scoreNum);
-//     if(oldScore<scoreNum){
-//         cardClickHandler(cardsOnTable)
-//         oldScore=scoreNum;
-//     }
-// }
+function startGameLoop(cardsOnTable, shuffledDeck, scoreNum,userSelected) {
+    
+    displayCards(cardsOnTable);
+    setupClickListeners(cardsOnTable, shuffledDeck, scoreNum);
+    
+    //cheating
+    console.log(findSet(cardsOnTable));
+    console.log(cardsOnTable);
+}
 
 function setupClickListeners(cardsOnTable, shuffledDeck, scoreNum) {
     const cards = document.querySelectorAll('.card-box');
@@ -219,15 +221,12 @@ function setupClickListeners(cardsOnTable, shuffledDeck, scoreNum) {
                         });
                         //Replace cards
                         cardReplacing(userSelected[0], userSelected[1], userSelected[2], cardsOnTable, shuffledDeck);
-                        cardId = card.getAttribute('id');
-                        displayCards(cardsOnTable);
-
-
-                        setupClickListeners(cardsOnTable, shuffledDeck, scoreNum);
-
-                        //cheating
-                        console.log(findSet(cardsOnTable));
-                        console.log(cardsOnTable);
+                        
+                        userSelected = [];
+                        startGameLoop(cardsOnTable, shuffledDeck, scoreNum);
+                        
+                        
+                        
                     }
                 }
 
