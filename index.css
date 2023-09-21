@@ -96,6 +96,10 @@ body, html {
     background-color: #f9f9f9;
 }
 
+.message-box p {
+    color: black;
+}
+
 .result{
     margin-top: 50px;
     margin-left: 250px;
@@ -118,17 +122,11 @@ body, html {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 0, 0, 0); /* Initially transparent */
-    opacity: 0; /* Initially, make it completely transparent */
+    background-color: rgba(255, 0, 0, 0.5); /* Transparent red */
+    opacity: 1; /* Make the overlay fully visible */
     transition: opacity 0.3s, background-color 0.3s; /* Add transitions for a smooth effect */
     z-index: 2; /* Higher z-index value to appear on top of card-box */
 }
-
-.selected:hover::before {
-    background-color: rgba(255, 0, 0, 0.5); /* Transparent red (adjust the alpha value for the desired transparency) */
-    opacity: 1; /* On hover, make the overlay fully visible */
-}
-
 
 .card-display-container {
     margin-top: 50px;

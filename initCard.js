@@ -1,19 +1,22 @@
 
 /*Current problems
-1. Once card is clicked. It should  be shown as selected. However currently it only shown as selected when clicking
+
 2. Game will end after 3 cards is selected. It should continue before time = 0
-3. Rules page need styling. And a return button should be added.
+
 */
+
 
 import { findSet, cardReplacing } from './cardReplacing.js';
 import { verifySet } from './verifySet.js';
 import { message } from './message.js';
 import { displayScore } from './ScoreBoard.js';
 
-//Set up message and scoreboard
-let text = "try your best to find sets!";
-message(text);
-displayScore(0);
+let gameIsActive = false;
+let userSelected = [];
+let scoreNum = 0;
+let oldScore = scoreNum;
+let text = "test";
+
 
 
 //initialize the card attributes array
@@ -21,6 +24,7 @@ const colorArr = ["blue", "green", "purple"];
 const shapeArr = ["diamond", "oval", "squiggles"];
 const numberArr = [1, 2, 3];
 const shadingArr = ["open", "solid", "striped"];
+
 
 
 //construct the card into object
@@ -63,7 +67,7 @@ console.log(deck);
 
 //shuffle the card
 function shuffle(deck) {
-    const shuffledDeck = [...deck];
+    let shuffledDeck = [...deck];
     //Fisher-Yates (Knuth) Shuffle
     for (let i = shuffledDeck.length - 1; i > 0; i--) {
         const randomIndex = Math.floor(Math.random() * (i + 1));
@@ -72,49 +76,35 @@ function shuffle(deck) {
     return shuffledDeck;
 }
 
-//test
-const shuffledDeck = shuffle(deck);
-//console.log(shuffledDeck);
 
 //generate 12 cards on table
 function onTable(shuffledDeck) {
     let cardsOnTable = [];
-    let hasSet = false;
+    let set = [];
+    let setFlag = false;
     let hint = [];
-    while (!hasSet) {
+    while (!setFlag) {
         cardsOnTable = [];
         for (let i = 0; i < 12; i++) {
             let removedCard = shuffledDeck.shift();
             cardsOnTable.push(removedCard);
         };
-        hasSet = findSet(cardsOnTable);
-        if (!hasSet) {
+        set = findSet(cardsOnTable);
+        if (set.length != 0) {
+            setFlag = true;
+        } else {
             while (cardsOnTable.length > 0) {
                 shuffledDeck.push(cardsOnTable.pop());
             }
-        } else {
             //Can be used for print hint 
-            console.log(hasSet);
         }
+        console.log(set);
     }
+    console.log(cardsOnTable);
     return cardsOnTable;
 }
 
-//let cardsOnTable = onTable(shuffledDeck);
 
-//Even: test
-function printCardsInfo(cardsOnTable) {
-    for (let i = 0; i < cardsOnTable.length; i++) {
-        const card = cardsOnTable[i];
-        console.log(`Card ${i + 1}:`);
-        console.log(`Id ${card.id}:`);
-        console.log(`Color: ${card.color}`);
-        console.log(`Shape: ${card.shape}`);
-        console.log(`Number: ${card.number}`);
-        console.log(`Shading: ${card.shading}`);
-        console.log('-----------------------------');
-    }
-}
 
 //display the cards from cardsOnTable list
 function displayCards(cardsOnTable) {
@@ -138,9 +128,6 @@ function displayCards(cardsOnTable) {
         cardDiv.appendChild(img);
         container.appendChild(cardDiv);
     };
-
-    //for test
-    console.log(cardsOnTable)
 };
 
 
@@ -149,37 +136,57 @@ window.onload = function () {
     const deck = generateDeck();
     const shuffledDeck = shuffle(deck);
     let cardsOnTable = onTable(shuffledDeck);
-    //rintCardsInfo(cardsOnTable);
-    displayCards(cardsOnTable);
+    let startBtn = document.getElementById("StartGame");
 
-    setupClickListeners(cardsOnTable);
+    startBtn.addEventListener("click", function() {
+        gameIsActive = true;
+        if(gameIsActive == true){
+            startGameLoop(cardsOnTable, shuffledDeck, scoreNum);
+        }     
+    });
+
+
+    //printCardsInfo(cardsOnTable);
+    displayCards(cardsOnTable);
+    
+    //Set up message and scoreboard
+    let text = "try your best to find sets!";
+    message(text);
+    displayScore(scoreNum);
 };
 
+function startGameLoop(cardsOnTable, shuffledDeck, scoreNum,userSelected) {
+    
+    displayCards(cardsOnTable);
+    setupClickListeners(cardsOnTable, shuffledDeck, scoreNum);
+    
+    //cheating
+    console.log(findSet(cardsOnTable));
+    console.log(cardsOnTable);
+}
 
-//add the clickListener for the cards to connect verifySet function with the html
-
-function setupClickListeners(cardsOnTable) {
+function setupClickListeners(cardsOnTable, shuffledDeck, scoreNum) {
     const cards = document.querySelectorAll('.card-box');
     let userSelected = [];
-
+    let temp;
     cards.forEach(function (card) {
         card.addEventListener('click', function () {
-            //add the score board
-            // Initialize the score to 0
-            let scoreNum = 0;
 
             //link the card with id
-            const cardId = card.getAttribute('id');
+            let cardId = card.getAttribute('id');
 
             // Check if the card is already selected
-            const isSelected = card.classList.contains('selected');
-
+            let isSelected = card.classList.contains('selected');
+            
+            message("Click a card to continue");
             if (isSelected) {
                 // Card is already selected, unselect it
                 card.classList.remove('selected');
-                // Remove the card from the userSelected array
-                userSelected = userSelected.filter((selectedCard) => selectedCard.id !== cardId);
-                console.log(userSelected);
+                // Remove selected card from array
+                userSelected = userSelected.filter((selectedCard) => selectedCard.id != cardId);
+
+                //console.log(userSelected);
+
             } else {
                 // Card is not selected, select it and add it to the userSelected array
                 card.classList.add('selected');
@@ -187,32 +194,40 @@ function setupClickListeners(cardsOnTable) {
                     return card.id === parseInt(cardId);
                 });
                 userSelected.push(clickedCard);
-                console.log(userSelected);
+
+                //console.log(userSelected);
             }
+
 
             //if user selected 3
             if (userSelected.length === 3) {
                 //check if it is a set
-                const isSet = verifySet(userSelected[0], userSelected[1], userSelected[2]);
+                let isSet = verifySet(userSelected[0], userSelected[1], userSelected[2]);
                 text = isSet ? 'Yes, it is a set!' : 'No, it is not a set!';
                 message(text);
-                //scoreNum=2;
 
                 //if it is not, promoted to restart the game
                 if (!isSet) {
-                    text += ' Click a card to restart the game.';
-                    message(text);
-                    displayScore(10);   //These displayScore function cannot work.
+                    displayScore(scoreNum);   //These displayScore function cannot work.
+                    userSelected = [];
                 } else {
                     scoreNum += 1;
+                    console.log(scoreNum);
                     displayScore(scoreNum);
                     if (shuffledDeck.length === 0) {
                         console.log("There is no card in shuffledDeck");
                     } else {
+                        cards.forEach(function (card) {
+                            card.removeEventListener;
+                        });
                         //Replace cards
                         cardReplacing(userSelected[0], userSelected[1], userSelected[2], cardsOnTable, shuffledDeck);
-                        //Refreash card displayed
-                        displayCards(cardsOnTable);
+                        
+                        userSelected = [];
+                        startGameLoop(cardsOnTable, shuffledDeck, scoreNum);
+                        
+                        
+                        
                     }
                 }
 
@@ -220,11 +235,12 @@ function setupClickListeners(cardsOnTable) {
                 cards.forEach(function (card) {
                     card.classList.remove('selected');
                 });
-                userSelected.length = 0;
-                console.log(userSelected);
+
+                //console.log(userSelected);
             };
+            console.log(userSelected);
         });
     });
 };
 
-
+export const scores = scoreNum;
