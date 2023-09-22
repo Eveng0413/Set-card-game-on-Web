@@ -1,23 +1,8 @@
 
-/*Current problems
-
-2. Game will end after 3 cards is selected. It should continue before time = 0
-
-*/
-
-
 import { findSet, cardReplacing } from './cardReplacing.js';
 import { verifySet } from './verifySet.js';
 import { message } from './message.js';
 import { displayScore } from './ScoreBoard.js';
-
-let gameIsActive = false;
-let userSelected = [];
-let scoreNum = 0;
-let oldScore = scoreNum;
-let text = "test";
-
-
 
 //initialize the card attributes array
 const colorArr = ["blue", "green", "purple"];
@@ -25,6 +10,17 @@ const shapeArr = ["diamond", "oval", "squiggles"];
 const numberArr = [1, 2, 3];
 const shadingArr = ["open", "solid", "striped"];
 
+
+//initialize state variable
+let state = {
+    cardsOnTable: [],
+    shuffledDeck: [],
+    userSelected: [],
+    totalSeconds: 10,
+    scoreNum: 0,
+    gameIsActive: false,
+    text: "test"
+}
 
 
 //construct the card into object
@@ -61,58 +57,60 @@ function generateDeck() {
     return deck;
 }
 
-//test
-const deck = generateDeck();
-console.log(deck);
 
 //shuffle the card
 function shuffle(deck) {
-    let shuffledDeck = [...deck];
+    state.shuffledDeck = [...deck];
     //Fisher-Yates (Knuth) Shuffle
-    for (let i = shuffledDeck.length - 1; i > 0; i--) {
+    for (let i = state.shuffledDeck.length - 1; i > 0; i--) {
         const randomIndex = Math.floor(Math.random() * (i + 1));
-        [shuffledDeck[i], shuffledDeck[randomIndex]] = [shuffledDeck[randomIndex], shuffledDeck[i]];
+        [state.shuffledDeck[i], state.shuffledDeck[randomIndex]] = [state.shuffledDeck[randomIndex], state.shuffledDeck[i]];
     };
-    return shuffledDeck;
+    return state.shuffledDeck;
 }
 
 
 //generate 12 cards on table
-function onTable(shuffledDeck) {
-    let cardsOnTable = [];
+function onTable() {
+
     let set = [];
     let setFlag = false;
-    let hint = [];
+
+    //The 12 cards should always contain at least 1 set
     while (!setFlag) {
-        cardsOnTable = [];
+        state.cardsOnTable = [];
+        //draw 12 cards
         for (let i = 0; i < 12; i++) {
-            let removedCard = shuffledDeck.shift();
-            cardsOnTable.push(removedCard);
+            let removedCard = state.shuffledDeck.shift();
+            state.cardsOnTable.push(removedCard);
         };
-        set = findSet(cardsOnTable);
+        //check if there is at least 1 set
+        set = findSet(state.cardsOnTable);
         if (set.length != 0) {
             setFlag = true;
         } else {
-            while (cardsOnTable.length > 0) {
-                shuffledDeck.push(cardsOnTable.pop());
+            //If not, redraw 12 cards
+            while (state.cardsOnTable.length > 0) {
+                state.shuffledDeck.push(state.cardsOnTable.pop());
             }
-            //Can be used for print hint 
         }
         console.log(set);
     }
-    console.log(cardsOnTable);
-    return cardsOnTable;
+    console.log(state.cardsOnTable);
+    return state.cardsOnTable;
 }
 
 
 
 //display the cards from cardsOnTable list
-function displayCards(cardsOnTable) {
+export function displayCards() {
     const container = document.querySelector(".card-display-container");
     //Clear old content
+    //BE CAREFUL this will also clear old elements
+    //which means old listener will be cleared!!!!!!!!!!!!!
     container.innerHTML = '';
     //create the div for cards
-    for (const card of cardsOnTable) {
+    for (const card of state.cardsOnTable) {
         const cardDiv = document.createElement('div');
         cardDiv.classList.add('card-box')
         //set the div id as the card id
@@ -133,114 +131,122 @@ function displayCards(cardsOnTable) {
 
 
 window.onload = function () {
+    //Initialize cards (deck shuffledDeck cardsOnTable) and  time
     const deck = generateDeck();
-    const shuffledDeck = shuffle(deck);
-    let cardsOnTable = onTable(shuffledDeck);
-    let startBtn = document.getElementById("StartGame");
+    state.shuffledDeck = shuffle(deck);
+    state.cardsOnTable = onTable();
+    state.totalSeconds = 3 * 60;
 
-    startBtn.addEventListener("click", function() {
-        gameIsActive = true;
-        if(gameIsActive == true){
-            startGameLoop(cardsOnTable, shuffledDeck, scoreNum);
-        }     
+    //Add listener to Start Game
+    let startBtn = document.getElementById("StartGame");
+    startBtn.addEventListener("click", function () {
+        state.gameIsActive = true;
+        if (state.gameIsActive == true) {
+            //If start game is clicked, game begin
+            startGameLoop();
+        }
     });
 
+    //add listener to New Game button
+    let newGameBtn = document.getElementById("NewGame");
+        newGameBtn.addEventListener("click", function () {
+        location.reload(); //  "New Game" will refreash the whole page
+    });
 
     //printCardsInfo(cardsOnTable);
-    displayCards(cardsOnTable);
-    
+    displayCards();
+
     //Set up message and scoreboard
-    let text = "try your best to find sets!";
-    message(text);
-    displayScore(scoreNum);
+    state.text = "Try your best to find sets!";
+    message(state.text);
+    displayScore(state.scoreNum);
 };
 
-function startGameLoop(cardsOnTable, shuffledDeck, scoreNum,userSelected) {
-    
-    displayCards(cardsOnTable);
-    setupClickListeners(cardsOnTable, shuffledDeck, scoreNum);
-    
+function startGameLoop() {
+
+    displayCards();
+    setupClickListeners();
+
     //cheating
-    console.log(findSet(cardsOnTable));
-    console.log(cardsOnTable);
+    console.log(findSet(state.cardsOnTable));
+    console.log(state.cardsOnTable);
 }
 
-function setupClickListeners(cardsOnTable, shuffledDeck, scoreNum) {
-    const cards = document.querySelectorAll('.card-box');
-    let userSelected = [];
-    let temp;
-    cards.forEach(function (card) {
-        card.addEventListener('click', function () {
+export function cardClickListener(card,cards){
+    //link the card with id
+    let cardId = card.getAttribute('id');
 
-            //link the card with id
-            let cardId = card.getAttribute('id');
+    // Check if the card is already selected
+    let isSelected = card.classList.contains('selected');
 
-            // Check if the card is already selected
-            let isSelected = card.classList.contains('selected');
-            
-            message("Click a card to continue");
-            if (isSelected) {
-                // Card is already selected, unselect it
-                card.classList.remove('selected');
-                // Remove selected card from array
-                userSelected = userSelected.filter((selectedCard) => selectedCard.id != cardId);
+    message("Click a card to continue");
+    if (isSelected) {
+        // Card is already selected, unselect it
+        card.classList.remove('selected');
+        // Remove selected card from array
+        state.userSelected = state.userSelected.filter((selectedCard) => selectedCard.id != cardId);
+    } else {
+        // Card is not selected, select it and add it to the userSelected array
+        card.classList.add('selected');
+        const clickedCard = state.cardsOnTable.find(function (card) {
+            return card.id === parseInt(cardId);
+        });
+        state.userSelected.push(clickedCard);
+    }
 
-                //console.log(userSelected);
+    //if user selected 3
+    if (state.userSelected.length === 3) {
+        //check if it is a set
+        let isSet = verifySet(state.userSelected[0], state.userSelected[1], state.userSelected[2]);
+        state.text = isSet ? 'Yes, it is a set!' : 'No, it is not a set!';
+        message(state.text);
 
+        //if it is not, promoted to restart the game
+        if (!isSet) {
+            displayScore(state.scoreNum); 
+            // Clear seleced cards
+            state.userSelected = [];
+        } else {
+            state.scoreNum += 1;
+            displayScore(state.scoreNum);
+            if (state.shuffledDeck.length === 0) {
+                //Need to be done
+                console.log("There is no card in shuffledDeck");
             } else {
-                // Card is not selected, select it and add it to the userSelected array
-                card.classList.add('selected');
-                const clickedCard = cardsOnTable.find(function (card) {
-                    return card.id === parseInt(cardId);
-                });
-                userSelected.push(clickedCard);
-
-                //console.log(userSelected);
-            }
-
-
-            //if user selected 3
-            if (userSelected.length === 3) {
-                //check if it is a set
-                let isSet = verifySet(userSelected[0], userSelected[1], userSelected[2]);
-                text = isSet ? 'Yes, it is a set!' : 'No, it is not a set!';
-                message(text);
-
-                //if it is not, promoted to restart the game
-                if (!isSet) {
-                    displayScore(scoreNum);   //These displayScore function cannot work.
-                    userSelected = [];
-                } else {
-                    scoreNum += 1;
-                    console.log(scoreNum);
-                    displayScore(scoreNum);
-                    if (shuffledDeck.length === 0) {
-                        console.log("There is no card in shuffledDeck");
-                    } else {
-                        cards.forEach(function (card) {
-                            card.removeEventListener;
-                        });
-                        //Replace cards
-                        cardReplacing(userSelected[0], userSelected[1], userSelected[2], cardsOnTable, shuffledDeck);
-                        
-                        userSelected = [];
-                        startGameLoop(cardsOnTable, shuffledDeck, scoreNum);
-                        
-                        
-                        
-                    }
-                }
-
-                //clear the selection
+                //Avoid muti-listeners
                 cards.forEach(function (card) {
-                    card.classList.remove('selected');
+                    card.removeEventListener;
                 });
 
-                //console.log(userSelected);
-            };
-            console.log(userSelected);
+                //Replace cards
+                cardReplacing(state.userSelected[0], state.userSelected[1], state.userSelected[2], state.cardsOnTable, state.shuffledDeck);
+                //Clear seleced cards
+                state.userSelected = [];
+                startGameLoop();
+            }
+        }
+
+        //clear the selection
+        cards.forEach(function (card) {
+            card.classList.remove('selected');
+        });
+    };
+}
+
+export function setupClickListeners() {
+    const cards = document.querySelectorAll('.card-box');
+    state.userSelected = [];
+
+    //Add listener to every card using cardClickListener
+    //I seperate adding listeners to 2 steps because I need to solve another problem
+    //However, it turns out to be meaningless. I may combine them back
+    cards.forEach(function (card) {
+        card.addEventListener('click', function(){
+            cardClickListener(card,cards);
         });
     });
 };
 
-export const scores = scoreNum;
+//Export state
+export const userState = state;
+
