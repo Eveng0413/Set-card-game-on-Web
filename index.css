@@ -5,17 +5,38 @@ body, html {
     font-family: 'Arial, sans-serif';
     background-color: #FAF3E0; /* Peach background to give a warm undertone to your page */
 }
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% center;
+    }
+    100% {
+        background-position: 100% center;
+    }
+}
 
 .top-bar {
     display: flex;
     justify-content: space-around;
-    background-color: #1F1F1F; /* Black for the top bar */
-    padding: 20px;
+    background: linear-gradient(45deg, #8B4513, #D2691E, #8B4513); /* Brownish-golden gradient with sparkles */
+    padding: 1px;
     position: relative;
     width: 100%;
     top: 0;
     z-index: 1000;
+    color: #fff; /* White text color for contrast */
+    animation: gradientAnimation 5s linear infinite; /* Flowing animation with a 5-second duration */
+    background-size: 200% auto;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Add a subtle shadow for depth */
 }
+
+
+/* Hide both horizontal and vertical scrollbars */
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
+}
+
 
 .top-title {
     text-align: center;
@@ -24,20 +45,21 @@ body, html {
 }
 
 .scoreboard-container, .timer-container, .rule-button-container {
-    color: #FAF3E0; /* Peach for the text to contrast against the black background */
-    font-size: 20px;
+    color: #ffffff; /* Peach for the text to contrast against the black background */
+    font-size: 10px;
+    
 }
 
 .rule-button-container .centered-button {
     padding: 10px 50px;
-    background-color: #78C2AD; /* Vibrant teal for the button */
+    background-color: #f7f7f297; /* Vibrant teal for the button */
     border-radius: 5px;
     color: #1F1F1F; /* Black for the button text */
     transition: background-color 0.3s; /* Smooth transition on hover */
 }
 
 .rule-button-container .centered-button:hover {
-    background-color: #56A08E; /* A darker shade of teal for hover effect */
+    background-color: #c23d3d; /* A darker shade of teal for hover effect */
 }
 
 .main-content {
@@ -99,6 +121,22 @@ body, html {
 .message-box p {
     color: black;
 }
+
+
+.result{
+    margin-top: 600px;
+    margin-left: 250px;
+    height: 100px;
+    width: calc(100% - 220px);
+    position: absolute;
+    z-index: 2;
+}
+
+#resultText{
+    color: red;
+    font-size: 50px;
+}
+
 
 /*add for selection*/
 .selected::before {
@@ -162,6 +200,7 @@ body, html {
     outline: none; /* Remove default focus outline */
     box-shadow: 0 0 5px rgba(0,123,255,0.5); /* Add a subtle glow effect on focus */
 }
+
 /*add for end game summary*/
 
 .card-display-container {
@@ -196,9 +235,19 @@ body, html {
     height: 250x;
 }
 
-.card-box:hover {
-    transform: scale(1.05); /* Slightly enlarge the card on hover for a popping effect */
+.card-box:first-child {
+    margin-top: 5px; /* Reduce the top margin for the first row of cards */
 }
+
+
+.card-box:hover,
+.card-box:focus { /* Apply styling when the card is hovered or focused (clicked) */
+    transform: scale(1.05); /* Slightly enlarge the card for a popping effect */
+}
+
+
+
+
 
 .column {
     margin: 0 10px;
@@ -213,7 +262,7 @@ body, html {
     text-align: center;
     border: 1px solid #ccc;
     border-radius: 5px;
-    height: calc(50% - 20px);
+    height: calc(50% - 15px);
     box-sizing: border-box;
     transition: background-color 0.3s; /* Smooth transition on hover */
 }
