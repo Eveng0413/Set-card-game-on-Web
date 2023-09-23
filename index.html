@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,3 +51,74 @@
     </div>
 </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Home Page of Set</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="timer.css">
+    <link rel="stylesheet" href="Scoreboard.css">
+    <script type="module" src="message.js"></script> 
+    <script type="module" src="timer.js"></script> 
+    <script type="module" src="ScoreBoard.js"></script> 
+    <script type="module" src="cardReplacing.js"></script> 
+    <script type="module" src="verifySet.js"></script>
+    <script type="module" src="initCard.js"></script> 
+</head>
+<body>
+    <div class="grey" id="grey"></div>
+    <div class="top-bar">
+        <div class="scoreboard-container">
+            <div class="top-title">Scoreboard</div>
+            <div class="scoreboard">
+                <div id="title">Number of Sets found: </div>
+                <div id="score"><span id="scoreNum"></span></div>
+            </div>
+        </div>
+        <div class="timer-container">
+            <div class="top-title">Timer</div>
+            <div class="timer-container">
+                <div class="timer-box">
+                    00:03:00
+                </div>
+            </div>
+        </div>
+        <div class="rule-button-container">
+            <a href="rule.html" class="centered-button">View Rules</a>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="left-sidebar-container">
+            <button id="NewGame">New game</button>
+            <button id="StartGame">Start game</button>
+            <button id="PauseGame">Pause game</button>
+            <button id="hint">Hint</button>
+            <div class="message-box" id="messageBox"><p>Test</p></div>
+        </div>
+
+            <!-- Changes -->
+        <div class="summary-panel" id="summaryPanel" >
+            <div class="panel-heading">Game Summary</div>
+            <div class="panel-body">
+            <p>Game Ends! Here is the game summary for this run of game</p>
+            </div>
+            
+            <ul class="list-group">
+            <li class="SetsFound" id="SetsFound">Sets Found</li>
+            <li class="TimeUsed" id="TimeUsed">Time Used</li>
+            </ul>
+
+            <button id="NewGame2">Start New Game</button>
+        </div>
+        <!-- Changes -->
+        
+        <div class="card-display-container">
+            
+        </div>
+    </div>
+</body>
+</html>
+>>>>>>> 139e5c49bf7167f511a0649c5eeb4f3c2ba8fb14
