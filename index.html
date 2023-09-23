@@ -14,6 +14,7 @@
     <script type="module" src="initCard.js"></script> 
 </head>
 <body>
+    <div class="grey" id="grey"></div>
     <div class="top-bar">
         <div class="scoreboard-container">
             <div class="top-title">Scoreboard</div>
@@ -43,7 +44,23 @@
             <button id="hint">Hint</button>
             <div class="message-box" id="messageBox"><p>Test</p></div>
         </div>
-        <div class="result"> <span id="resultText"></span></div>
+
+            <!-- Changes -->
+        <div class="summary-panel" id="summaryPanel" >
+            <div class="panel-heading">Game Summary</div>
+            <div class="panel-body">
+            <p>Game Ends! Here is the game summary for this run of game</p>
+            </div>
+            
+            <ul class="list-group">
+            <li class="SetsFound" id="SetsFound">Sets Found</li>
+            <li class="TimeUsed" id="TimeUsed">Time Used</li>
+            </ul>
+
+            <button id="NewGame2">Start New Game</button>
+        </div>
+        <!-- Changes -->
+        
         <div class="card-display-container">
             
         </div>

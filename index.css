@@ -100,20 +100,6 @@ body, html {
     color: black;
 }
 
-.result{
-    margin-top: 50px;
-    margin-left: 250px;
-    height: 100px;
-    width: calc(100% - 220px);
-    position: absolute;
-    z-index: 2;
-}
-
-#resultText{
-    color: red;
-    font-size: 50px;
-}
-
 /*add for selection*/
 .selected::before {
     content: ''; /* Required for pseudo-elements */
@@ -127,6 +113,56 @@ body, html {
     transition: opacity 0.3s, background-color 0.3s; /* Add transitions for a smooth effect */
     z-index: 2; /* Higher z-index value to appear on top of card-box */
 }
+
+/*add for end game summary*/
+.grey{
+    display: none;
+    background-color: rgba(128, 128, 128, 0.5);
+    z-index: 2;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+.summary-panel{
+    display: none;
+    padding: 60px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    position: absolute;
+    color:black;
+    z-index: 3;
+    height: 200px;
+    margin:50px;
+    width: 500px;
+    margin-top: 20%;
+    margin-left:40%;
+}
+
+.panel-heading{
+    font-size: 40px;
+}
+
+.summary-panel button {
+    margin-bottom: 10px;
+    padding: 10px 15px;
+    font-size: 16px;
+    color: #ffffff; /* White text color */
+    background-color: burlywood; /* Primary blue color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.summary-panel button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.summary-panel button:focus {
+    outline: none; /* Remove default focus outline */
+    box-shadow: 0 0 5px rgba(0,123,255,0.5); /* Add a subtle glow effect on focus */
+}
+/*add for end game summary*/
 
 .card-display-container {
     margin-top: 50px;

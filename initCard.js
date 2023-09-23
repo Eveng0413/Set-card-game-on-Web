@@ -128,14 +128,32 @@ export function displayCards() {
     };
 };
 
+function showDiv() {
+    var divElement = document.getElementById("summaryPanel");
+    var divElement2 = document.getElementById("grey");
+    // Set visible
+    divElement.style.display = "block";
+    divElement2.style.display = "block";
+}
+function hideDiv() {
+    var divElement = document.getElementById("summaryPanel");
+    var divElement2 = document.getElementById("grey");
+    // hide the div
+    divElement.style.display = "none";
+    divElement2.style.display = "none";
+}
 
+function writeText(div,text) {
+    var divElement = document.getElementById(div);
+    divElement.textContent = text;
+}
 
 window.onload = function () {
     //Initialize cards (deck shuffledDeck cardsOnTable) and  time
     const deck = generateDeck();
     state.shuffledDeck = shuffle(deck);
     state.cardsOnTable = onTable();
-    state.totalSeconds = 3 * 60;
+    state.totalSeconds = 1 * 30;
 
     //Add listener to Start Game
     let startBtn = document.getElementById("StartGame");
@@ -144,6 +162,23 @@ window.onload = function () {
         if (state.gameIsActive == true) {
             //If start game is clicked, game begin
             startGameLoop();
+            //If end rules meet           
+            if((state.shuffledDeck.length==0 && state.cardsOnTable.length==0)|| state.totalSeconds==0){
+                //inactive the game
+                state.gameIsActive = false;
+                //visible game summary and grey
+                showDiv();
+                //write the result
+                writeText("SetsFound",state.scoreNum);
+                writeText("TimeUsed",state.totalSeconds);
+            
+                let newGame2Btn = document.getElementById("NewGame2");
+                    newGame2Btn.addEventListener("click", function () {
+                        //invisible the game summary and grey
+                        hideDiv();
+                        location.reload(); //  "New Game" will refreash the whole page
+                    });
+            }
         }
     });
 
@@ -163,6 +198,8 @@ window.onload = function () {
 };
 
 function startGameLoop() {
+
+    hideDiv();
 
     displayCards();
     setupClickListeners();
