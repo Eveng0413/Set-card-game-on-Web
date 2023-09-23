@@ -1,8 +1,8 @@
-#Project name and introduction
+# Project name and introduction
  For the first project in CSE 3901, we created a card game called "Set" in which players need to find a group of cards that satisfy a particular critera. The goal of the game is to find as many sets in the game within a time limit. For our game the time limit is 5 minutes. Also, 12 cards will be faced up in the beginning of the game and when a set is found, the cards that are in set will be replaced. This game is implemented in Javascript for the functionality of the game, and HTML/CSS is used for the front-end. Additionally, we created a hint generator as our additional feature.
 
 
-#Rules of Set card game
+## Rules of Set card game
 
 Set is a card game that requires observation and quick thinking. 
 In the game, each card has four different attributes: number (one, two, three), 
@@ -16,7 +16,7 @@ Ex:
 
   - if the cards selected are 3 cards where each has a Diamond and each is Red and each card has a different number of diamonds, but two are Striped and one is Filled-in, then it's not a set because the Shading feature condition isn't satisfied.
 
-#How to play the game
+## How to play the game
 
 At the start of the game, 12 cards are displayed in the middle of the screen. Players start the game and make sets based on the rules and the countdown of five mintues will begin.
 
@@ -33,7 +33,7 @@ The game ends when the countdown ends.
 Finally, players can get the number of sets found through the statistics panel.
 
 
-#installation instructions
+## installation instructions
 1. download VS code
 2. Install an extension called live server
 3. Then close vs code and reopen it
