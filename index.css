@@ -123,7 +123,7 @@ body, html {
 }
 
 .result{
-    margin-top: 50px;
+    margin-top: 600px;
     margin-left: 250px;
     height: 100px;
     width: calc(100% - 220px);
@@ -176,14 +176,27 @@ body, html {
     justify-content: center;
     align-items: center;
     font-size: 16px; /* Decrease font size if necessary */
-    transition: transform 0.3s; /* Smooth transition for a popping effect on hover */
+    transition: transform 0.3s, background-color 0.3s; /* Smooth transitions for popping effect and background color */
     z-index: 1;
     height: 100%; /* Fill the entire height of the grid cell */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+.card-box {
+    
+    margin: 10px; /* Set the default margin for all cards */
 }
 
-.card-box:hover {
-    transform: scale(1.05); /* Slightly enlarge the card on hover for a popping effect */
+.card-box:first-child {
+    margin-top: 5px; /* Reduce the top margin for the first row of cards */
 }
+
+
+.card-box:hover,
+.card-box:focus { /* Apply styling when the card is hovered or focused (clicked) */
+    transform: scale(1.05); /* Slightly enlarge the card for a popping effect */
+   
+}
+
 
 
 .card-box:hover {
