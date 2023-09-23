@@ -52,14 +52,14 @@ body, html {
 
 .rule-button-container .centered-button {
     padding: 10px 50px;
-    background-color: #78C2AD; /* Vibrant teal for the button */
+    background-color: #f7f7f297; /* Vibrant teal for the button */
     border-radius: 5px;
     color: #1F1F1F; /* Black for the button text */
     transition: background-color 0.3s; /* Smooth transition on hover */
 }
 
 .rule-button-container .centered-button:hover {
-    background-color: #56A08E; /* A darker shade of teal for hover effect */
+    background-color: #c23d3d; /* A darker shade of teal for hover effect */
 }
 
 .main-content {
@@ -193,8 +193,7 @@ body, html {
 
 .card-box:hover,
 .card-box:focus { /* Apply styling when the card is hovered or focused (clicked) */
-    transform: scale(1.05); /* Slightly enlarge the card for a popping effect */
-   
+    transform: scale(1.05); /* Slightly enlarge the card for a popping effect *i/
 }
 
 
