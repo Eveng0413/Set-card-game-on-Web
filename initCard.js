@@ -230,7 +230,11 @@ function writeText(div, text) {
  * 
  * @returns
  *      
- * @calls
+ * @calls generateDeck()
+ * @calls hideDiv()
+ * @calls startGameLoop()
+ * @calls showDiv()
+ * @calls writeText()
  */
 
 window.onload = function () {
@@ -299,7 +303,8 @@ window.onload = function () {
  *  
  * @returns
  *      
- * @calls
+ * @calls displayCards() 
+ * @calls setupClickListeners()
  */
 
 function startGameLoop() {
@@ -320,7 +325,9 @@ function startGameLoop() {
  *          this is the 12 cards that are displayed. card should be one of its element
  * @returns
  *      
- * @calls
+ * @calls  message() 
+ * @calls  startGameLoop()
+ * @calls  cardReplacing()
  */
 
 export function cardClickListener(card, cards) {
@@ -390,7 +397,7 @@ export function cardClickListener(card, cards) {
  * 
  * @returns
  *      
- * @calls
+ * @calls cardClickListener()
  */
 export function setupClickListeners() {
     const cards = document.querySelectorAll('.card-box');
