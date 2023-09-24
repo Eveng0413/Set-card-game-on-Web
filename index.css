@@ -51,6 +51,10 @@ body, html {
 }
 
 .rule-button-container .centered-button {
+    display: flex;
+    justify-content: center; /* aligns horizontally to the center */
+    align-items: center;     /* aligns vertically to the center */
+    
     padding: 10px 50px;
     background-color: #f7f7f297; /* Vibrant teal for the button */
     border-radius: 5px;
