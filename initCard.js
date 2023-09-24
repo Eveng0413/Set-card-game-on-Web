@@ -22,8 +22,15 @@ let state = {
     text: "test"
 }
 
-
-//construct the card into object
+/** 
+ * construct the card into object
+ * 
+ * @param ,id, color, shape, number, shading
+ *          id and number as int; all other as string
+ * @returns ObjectOfCards
+ *      cards with attributes
+ * @calls
+ */
 function Card(id, color, shape, number, shading) {
     this.id = id;
     this.color = color;
@@ -32,7 +39,14 @@ function Card(id, color, shape, number, shading) {
     this.shading = shading;
 }
 
-//create a deck for 81 cards
+/** 
+ * create a deck for 81 cards
+ * 
+ * @param
+ * @returns ArrOfCardsInDeck
+ *      array of all 81 cards
+ * @calls
+ */
 function generateDeck() {
     const deck = [];
     let id = 0;
@@ -58,7 +72,15 @@ function generateDeck() {
 }
 
 
-//shuffle the card
+/** 
+ * shuffle the card
+ * 
+ * @param  deck
+ *          array of all 81 cards
+ * @returns shuffledDeck
+ *      array of all 81 cards desequenced
+ * @calls
+ */
 function shuffle(deck) {
     state.shuffledDeck = [...deck];
     //Fisher-Yates (Knuth) Shuffle
@@ -70,7 +92,15 @@ function shuffle(deck) {
 }
 
 
-//generate 12 cards on table
+/** 
+ * generate 12 cards on table
+ * 
+ * @param 
+ * 
+ * @returns cardsOnTable
+ *      array of 12 cards displayed on table
+ * @calls
+ */
 function onTable() {
 
     let set = [];
@@ -101,8 +131,16 @@ function onTable() {
 }
 
 
+/** 
+ * display the cards with attributes from cardsOnTable list in console.log
+ * 
+ * @param 
+ * 
+ * @returns
+ *      
+ * @calls
+ */
 
-//display the cards from cardsOnTable list
 export function displayCards() {
     const container = document.querySelector(".card-display-container");
     //Clear old content
@@ -128,6 +166,16 @@ export function displayCards() {
     };
 };
 
+/** 
+ * change the style in html from none to block so that selected div will be visible
+ * 
+ * @param 
+ * 
+ * @returns
+ *      
+ * @calls
+ */
+
 export function showDiv() {
     var divElement = document.getElementById("summaryPanel");
     var divElement2 = document.getElementById("grey");
@@ -135,6 +183,16 @@ export function showDiv() {
     divElement.style.display = "block";
     divElement2.style.display = "block";
 }
+
+/** 
+ * change the style in html from block to none so that selected div will be not visible
+ * 
+ * @param 
+ * 
+ * @returns
+ *      
+ * @calls
+ */
 function hideDiv() {
     var divElement = document.getElementById("summaryPanel");
     var divElement2 = document.getElementById("grey");
@@ -148,6 +206,17 @@ function hideDiv() {
         divElement2.style.display = "none";
     }
 }
+
+/** 
+ * change the style in html from none to block so that selected div will be visible
+ * 
+ * @param  div, text
+ *          str of div where the text will be displayed
+ *          str of text
+ * @returns
+ *      
+ * @calls
+ */
 
 function writeText(div, text) {
     var divElement = document.getElementById(div);
