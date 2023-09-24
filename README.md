@@ -18,19 +18,12 @@ Ex:
 
 ## How to play the game
 
-At the start of the game, 12 cards are displayed in the middle of the screen. Players start the game and make sets based on the rules and the countdown of five mintues will begin.
+At the start of the game click the start game button, and the timer will start the countdown from five minutes.  Players start the game and make sets based on the rules.
 
 If the the player forgets the rules of the game, at the top of the page a button will go to a different page with the rules of the game. As the game progresses, on the left panel a hint will be given, helping the player find a set.
 
-If there are any problem about the game, help can be sought from the help button.
+Once the timer is finished the game ends, and a message board will display the score and time it took to find the sets. Also, the user can click on the new game button on the left pannel to start another game.
 
-Once the timer is finished, a message board will display the score and time it took to find the sets. Also, the user can click on the new game button on the left pannel to start another game.
-
-If there are any problem about the game, help can be sought from the help button.
-
-
-The game ends when the countdown ends. 
-Finally, players can get the number of sets found through the statistics panel.
 
 
 ## installation instructions
