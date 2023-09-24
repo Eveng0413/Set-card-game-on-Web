@@ -1,17 +1,18 @@
+/* Styling for the scoreboard with color, font and size */
 .scoreboard {
-    background-color:brown;
+    background-color:brown; 
     border: 5px solid rgb(11, 11, 11);
     padding: 10px;
     margin: 10px;
     width: 200px;
     font-family: 'Quicksand', sans-serif;
 }
-
+/* Styling for the title of the scoreboard */
 #title{
     font-weight: bold;
     border-bottom: 1px solid #ddd;
 }
-
+/* Styling for the score */
 #score {
     text-align: center;
 }
