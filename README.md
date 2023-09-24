@@ -1,5 +1,5 @@
 # Project name and introduction
- For the first project in CSE 3901, we created a card game called "Set" in which players need to find a group of cards that satisfy a particular critera. The goal of the game is to find as many sets in the game within a time limit. For our game the time limit is 5 minutes. Also, 12 cards will be faced up in the beginning of the game and when a set is found, the cards that are in set will be replaced. This game is implemented in Javascript for the functionality of the game, and HTML/CSS is used for the front-end. Additionally, we created a hint generator as our additional feature.
+ For the first project in CSE 3901, we created a card game called "Set" in which players need to find a group of cards that satisfy a particular criteria. The goal of the game is to find as many sets in the game within a time limit. For our game the time limit is 5 minutes. Also, 12 cards will be faced up in the beginning of the game and when a set is found, the cards that are in set will be replaced. This game is implemented in Javascript for the functionality of the game, and HTML/CSS is used for the front-end. Additionally, we created a hint generator as our additional feature.
 
 
 ## Rules of Set card game
