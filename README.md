@@ -18,9 +18,9 @@ Ex:
 
 ## How to play the game
 
-At the start of the game click the start game button, and the timer will start the countdown from five minutes.  Players start the game and make sets based on the rules.
+Before playing, click view rules. At the start of the game click the start game button, and the timer will start the countdown from five minutes. Players start the game and make sets based on the rules.
 
-If the the player forgets the rules of the game, at the top of the page a button will go to a different page with the rules of the game. As the game progresses, on the left panel the player can click the hint button and a hint will be given, helping the player find a set.
+ As the game progresses, on the left panel the player can click the hint button and a hint will be given, helping the player find a set.
 
 Once the timer is finished the game ends, and a message board will display the score and time it took to find the sets. Also, if the user wants to start a new game then the user should click the new game button on the left hand pannel button and then on start game for the second round to begin.
 
@@ -36,6 +36,7 @@ Once the timer is finished the game ends, and a message board will display the s
 ## Possible installation issues
  1. If the index.html page is not loading, then reinstall live server
  2. If the whole page is frozen and the refresh button is not working and in the console it shows an infinite loop, then close VS code and download live server again
+
 
 
 
