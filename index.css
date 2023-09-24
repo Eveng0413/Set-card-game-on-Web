@@ -54,7 +54,7 @@ body, html {
     display: flex;
     justify-content: center; /* aligns horizontally to the center */
     align-items: center;     /* aligns vertically to the center */
-    
+    margin-top: 50px;
     padding: 10px 50px;
     background-color: #f7f7f297; /* Vibrant teal for the button */
     border-radius: 5px;
@@ -128,7 +128,7 @@ body, html {
 
 
 
-/*add for selection*/
+/* Selection effect for cards*/
 .selected::before {
     content: '';
     position: absolute;
@@ -207,6 +207,7 @@ body, html {
 
 /*add for end game summary*/
 
+/* The layout of 12 cards on the table */
 .card-display-container {
     margin: 10px auto 0;
     display: grid;
@@ -220,7 +221,7 @@ body, html {
     overflow-y: auto;
 }
 
-
+/* Cardholder adjustment */
 .card-box {
     position: relative;
     background-color: #FAEBD7; /* Light peach for the card background */
@@ -243,7 +244,7 @@ body, html {
     margin-top: 5px; /* Reduce the top margin for the first row of cards */
 }
 
-
+/* The hover effect of mouse over a card */
 .card-box:hover { /* Apply styling when the card is hovered or focused (clicked) */
     transform: scale(1.05); /* Slightly enlarge the card for a popping effect */
 }
@@ -274,6 +275,7 @@ body, html {
     background-color: #B8876E; /* Darker brownish peach for hover effect */
 }
 
+/* Adjustment for card picture in the cardholder */
 .card {
     width: 110px;
     height: 154px;
