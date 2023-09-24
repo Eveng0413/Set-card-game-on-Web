@@ -27,11 +27,11 @@ Once the timer is finished the game ends, and a message board will display the s
 
 
 ## Installation instructions
-1. download VS code
+1. Download VS code
 2. Install an extension called live server on VS code
 3. Then close VS code and reopen it
 4. Clone the repository for project 1
-5. click on index.html and then click on the go live button in right bottom corner of VS code and the browser will automatically open with the game.
+5. Click on index.html and then click on the go live button in right bottom corner of VS code and the browser will automatically open with the game.
 
 ## Possible installation issues
  1. If the index.html page is not loading, then reinstall live server
