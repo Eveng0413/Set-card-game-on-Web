@@ -145,7 +145,7 @@ export function displayCards() {
     const container = document.querySelector(".card-display-container");
     //Clear old content
     //BE CAREFUL this will also clear old elements
-    //which means old listener will be cleared!!!!!!!!!!!!!
+    //which means old listener will be cleared
     container.innerHTML = '';
     //create the div for cards
     for (const card of state.cardsOnTable) {
@@ -223,19 +223,28 @@ function writeText(div, text) {
     divElement.textContent = text;
 }
 
+/** 
+ * change the style in html from block to none so that selected div will be not visible
+ * 
+ * @param 
+ * 
+ * @returns
+ *      
+ * @calls
+ */
+
 window.onload = function () {
     //Initialize cards (deck shuffledDeck cardsOnTable) and  time
     const deck = generateDeck();
     state.shuffledDeck = shuffle(deck);
     state.cardsOnTable = onTable();
     state.totalSeconds = 5 * 60;
-    let timeForCalculation = 5 * 60;
+    let timeForCalculation = 5 * 60; // This is for calculate how much time does player use
     //Add listener to Start Game
     let startBtn = document.getElementById("StartGame");
 
+    //Hide summary message
     hideDiv();
-
-
 
     startBtn.addEventListener("click", function () {
         state.gameIsActive = true;
@@ -257,10 +266,10 @@ window.onload = function () {
                         location.reload(); //  "New Game" will refreash the whole page
                     });
                     //write the result
-                    let text1 = "Sets Found:  "+ state.scoreNum;
+                    let text1 = "Sets Found:  " + state.scoreNum;
                     let text2 = "Time Used:  " + (timeForCalculation - state.totalSeconds + " seconds");
-                    writeText("SetsFound",text1);
-                    writeText("TimeUsed",text2);
+                    writeText("SetsFound", text1);
+                    writeText("TimeUsed", text2);
                 }
             }, 1000); // check every second
         }
@@ -283,14 +292,36 @@ window.onload = function () {
     displayScore(state.scoreNum);
 };
 
+/** 
+ * This function will refreash cards and add listners to them
+ * 
+ * @param 
+ *  
+ * @returns
+ *      
+ * @calls
+ */
+
 function startGameLoop() {
     displayCards();
     setupClickListeners();
 
     //cheating
-    console.log(findSet(state.cardsOnTable));
-    console.log(state.cardsOnTable);
+    // console.log(findSet(state.cardsOnTable));
+    // console.log(state.cardsOnTable);
 }
+
+/** 
+ * This function will add listener to given card in given cards group
+ * 
+ * @param card
+ *          the card that will be added a listener
+ * @param cards
+ *          this is the 12 cards that are displayed. card should be one of its element
+ * @returns
+ *      
+ * @calls
+ */
 
 export function cardClickListener(card, cards) {
     //link the card with id
@@ -352,13 +383,20 @@ export function cardClickListener(card, cards) {
     };
 }
 
+/** 
+ * This function will set up listener to all cards displayed
+ * 
+ * @param 
+ * 
+ * @returns
+ *      
+ * @calls
+ */
 export function setupClickListeners() {
     const cards = document.querySelectorAll('.card-box');
     state.userSelected = [];
 
-    //Add listener to every card using cardClickListener
-    //I seperate adding listeners to 2 steps because I need to solve another problem
-    //However, it turns out to be meaningless. I may combine them back
+    //use for loop to add listener to every card
     cards.forEach(function (card) {
         card.addEventListener('click', function () {
             cardClickListener(card, cards);
