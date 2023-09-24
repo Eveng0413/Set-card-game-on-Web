@@ -1,5 +1,5 @@
 import { message } from "./message.js";
-import { userState, displayCards, setupClickListeners, cardClickListener } from "./initCard.js";
+import { userState, displayCards, setupClickListeners, cardClickListener, showDiv } from "./initCard.js";
 let timerBox = document.querySelector(".timer-box");
 let pauseResumeBtn = document.getElementById("PauseGame");
 let startBtn = document.getElementById("StartGame"); // Get the start button
@@ -30,6 +30,7 @@ startBtn.addEventListener("click", function() {
                     + " sets");
                     displayCards(userState.cardsOnTable);
                     userState.gameIsActive = false;
+                    showDiv();
                     return;
                 }
                 userState.totalSeconds--;
@@ -39,19 +40,3 @@ startBtn.addEventListener("click", function() {
         startBtn.disabled = true; // Disable the start button to prevent starting multiple intervals
     }
 });
-
-pauseResumeBtn.addEventListener("click", function() {
-    isPaused = !isPaused;
-    pauseResumeBtn.textContent = isPaused ? 'Continue Game' : 'Pause Game';
-    //Handling game
-    if(isPaused){
-        //Call displayCards because it can also remove listeners
-        displayCards(userState.cardsOnTable);
-    }else{
-        //Set listener back
-        setupClickListeners();
-    }
-});
-
-
-
