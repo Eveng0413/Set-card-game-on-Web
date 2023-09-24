@@ -240,8 +240,7 @@ body, html {
 }
 
 
-.card-box:hover,
-.card-box:focus { /* Apply styling when the card is hovered or focused (clicked) */
+.card-box:hover { /* Apply styling when the card is hovered or focused (clicked) */
     transform: scale(1.05); /* Slightly enlarge the card for a popping effect */
 }
 
