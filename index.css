@@ -123,20 +123,6 @@ body, html {
 }
 
 
-.result{
-    margin-top: 600px;
-    margin-left: 250px;
-    height: 100px;
-    width: calc(100% - 220px);
-    position: absolute;
-    z-index: 2;
-}
-
-#resultText{
-    color: red;
-    font-size: 50px;
-}
-
 
 /*add for selection*/
 .selected::before {
