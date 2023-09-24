@@ -138,6 +138,20 @@ body, html {
     z-index: 2; 
 }
 
+.hinted::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 25, 25, 0.178); /* Transparent red */
+    opacity: 1; /* Make the overlay fully visible */
+    transition: opacity 0.3s, background-color 0.3s; /* Add transitions for a smooth effect */
+    z-index: 2; 
+}
+
+
 /*add for end game summary*/
 .grey{
     display: none;

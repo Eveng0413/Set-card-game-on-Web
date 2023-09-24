@@ -1,4 +1,5 @@
-import {verifySet} from './verifySet.js'
+import {verifySet} from './verifySet.js';
+import {resetHints} from './hintGenerator.js';
 
 /**
  * Find set(s) in a given array of cards
@@ -81,6 +82,8 @@ export function cardReplacing(card1, card2, card3, cardsOnTable, shuffledDeck){
             shuffledDeck.push(new_card1, new_card2, new_card3);
         }
     }
+
+    resetHints(); //Inside hintGenerator.js, resets the amount of hints
 }
 /**
  * Find card by id
