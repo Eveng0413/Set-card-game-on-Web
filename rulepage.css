@@ -1,65 +1,71 @@
+/* Body Styles*/
+/* Reset default body properties and center content vertically and horizontally. */
 body {
-font-family: Arial, sans-serif;
-background-color: #f3f4f6;
-margin: 0;
-padding: 0;
-display: flex;
-justify-content: center;
-align-items: center;
-height: 100vh;
+    font-family: Arial, sans-serif;    /* Set the default font for the body. */
+    background-color: #f3f4f6;         /* Set a light gray background color. */
+    margin: 0;                         /* Reset default margin. */
+    padding: 0;                        /* Reset default padding. */
+    display: flex;                     /* Use flexbox to control the layout. */
+    justify-content: center;           /* Center the content horizontally. */
+    align-items: center;               /* Center the content vertically. */
+    height: 100vh;                     /* Set the height to fill the full viewport. */
 }
 
-
+/* Rule Box Styles*/
+/* Styling for a container that probably displays game rules or instructions. */
 .rule-box {
-width: 40%;
-padding: 20px;
-background-color: #fff;
-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-max-width: 800px;
-padding: 40px;
-background-color: #ffffff;
-border: 1px solid #d1d1d1;
-border-radius: 8px;
-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.08);
+    width: 40%;                        /* Set the width to 40% of its container. */
+    padding: 20px;                     /* Add padding for inner spacing. */
+    background-color: #fff;            /* Set a white background color. */
+    max-width: 800px;                  /* Set a maximum width for larger screens. */
+    padding: 40px;                     /* Increase padding (overriding the previous one). */
+    border: 1px solid #d1d1d1;         /* Add a light gray border. */
+    border-radius: 8px;                /* Round the corners. */
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.08); /* Add a subtle shadow for depth. */
 }
 
+/* Header Styles
 
+/* Styles for the main header within the rule box. */
 h2 {
-text-align: center;
-margin-top: 0;
-color: #333;
-font-size: 28px;
-border-bottom: 2px solid #007BFF;
-padding-bottom: 10px;
-margin-bottom: 20px;
+    text-align: center;                /* Center the text. */
+    margin-top: 0;                     /* Reset the top margin. */
+    color: #333;                       /* Set a dark gray color for the text. */
+    font-size: 28px;                   /* Set font size. */
+    border-bottom: 2px solid #007BFF;  /* Add a blue bottom border. */
+    padding-bottom: 10px;              /* Add padding below the text to space out from the border. */
+    margin-bottom: 20px;               /* Add margin below the element. */
 }
 
+/* Text Styles*/
 
+/* Generic text styling, probably for the rules' content. */
 text {
-display: block;
-color: #555;
-line-height: 1.7;
-font-size: 16px;
-white-space: pre-line; /* Helps in preserving new lines and white spaces as in the original text */
+    display: block;                    /* Display as a block-level element. */
+    color: #555;                       /* Set a medium gray color. */
+    line-height: 1.7;                  /* Increase line height for readability. */
+    font-size: 16px;                   /* Set font size. */
+    white-space: pre-line;             /* Preserve white spaces and new lines in the original text. */
 }
 
-
+/* Button Styles*/
+/* Styles for a return button, probably to go back to the main game or home page. */
 .return-home {
-position: absolute;
-top: 10px;
-right: 10px;
-padding: 10px 15px;
-background-color: #007BFF;
-color: #ffffff;
-border: none;
-border-radius: 5px;
-font-size: 14px;
-cursor: pointer;
-transition: background-color 0.3s ease;
+    position: absolute;                /* Absolute positioning relative to its positioned parent. */
+    top: 10px;                         /* Position from the top. */
+    right: 10px;                       /* Position from the right. */
+    padding: 10px 15px;                /* Add padding for space inside the button. */
+    background-color: #007BFF;         /* Set a blue background color. */
+    color: #ffffff;                    /* Set a white color for the text. */
+    border: none;                      /* Remove borders. */
+    border-radius: 5px;                /* Round the corners. */
+    font-size: 14px;                   /* Set font size. */
+    cursor: pointer;                   /* Change cursor to a hand when hovering. */
+    transition: background-color 0.3s ease; /* Smooth transition for background color change on hover. */
 }
 
-
+/* Button Hover Styles*/
+/* Styling for the button when hovered. */
 .return-home:hover {
-background-color: #0056b3;
+    background-color: #0056b3;         /* Darken the blue background color. */
 }
-
