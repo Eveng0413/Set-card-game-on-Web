@@ -1,5 +1,5 @@
 # Project name and introduction
- For the first project in CSE 3901, we created a card game called "Set" in which players need to find a group of cards that satisfy a particular criteria. The goal of the game is to find as many sets in the game within a time limit. For our game the time limit is 5 minutes. Also, 12 cards will be faced up in the beginning of the game and when a set is found, the cards that are in set will be replaced. This game is implemented in Javascript for the functionality of the game, and HTML/CSS is used for the front-end. Additionally, we created a hint generator as our additional feature.
+For the first project in CSE 3901, we created a card game called "Set" in which players need to find a group of cards that satisfy a particular criteria. The goal of the game is to find as many sets in the game within a time limit. For our game the time limit is 5 minutes. Also, 12 cards will be faced up in the beginning of the game and when a set is found, the cards that are in set will be replaced. This game is implemented in Javascript for the functionality of the game, and HTML/CSS is used for the front-end. Additionally, we created a hint generator as our additional feature.
 
 
 ## Rules of Set card game
@@ -20,9 +20,9 @@ Ex:
 
 Before playing, click view rules. At the start of the game click the start game button, and the timer will start the countdown from five minutes. Players start the game and make sets based on the rules.
 
- As the game progresses, on the left panel the player can click the hint button and a hint will be given, helping the player find a set.
+As the game progresses, on the left panel the player can click the hint button and a hint will be given, helping the player find a set.
 
-Once the timer is finished the game ends, and a message board will display the score and time it took to find the sets. Also, if the user wants to start a new game then the user should click the new game button on the left hand pannel button and then on start game for the second round to begin.
+Once the timer is finished the game ends or there is no more cards from the deck to replace, a game summary pannel will display the score and time it took to find the sets. Also, if the user wants to start a new game, the user should click the new game button on the game summary pannel button which takes the user to the main page and then click on start game for the second round to begin.
 
 
 

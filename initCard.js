@@ -19,7 +19,8 @@ let state = {
     totalSeconds: 3,
     scoreNum: 0,
     gameIsActive: false,
-    text: "test"
+    text: "test",
+    paused: false
 }
 
 /** 
@@ -230,7 +231,11 @@ function writeText(div, text) {
  * 
  * @returns
  *      
- * @calls
+ * @calls generateDeck()
+ * @calls hideDiv()
+ * @calls startGameLoop()
+ * @calls showDiv()
+ * @calls writeText()
  */
 
 window.onload = function () {
@@ -239,7 +244,6 @@ window.onload = function () {
     state.shuffledDeck = shuffle(deck);
     state.cardsOnTable = onTable();
     state.totalSeconds = 5 * 60;
-    let timeForCalculation = 5 * 60; // This is for calculate how much time does player use
     //Add listener to Start Game
     let startBtn = document.getElementById("StartGame");
 
@@ -266,16 +270,15 @@ window.onload = function () {
                         location.reload(); //  "New Game" will refreash the whole page
                     });
                     //write the result
+                    state.paused = true;
                     let text1 = "Sets Found:  " + state.scoreNum;
-                    let text2 = "Time Used:  " + (timeForCalculation - state.totalSeconds + " seconds");
+                    let text2 = "Time Used:  " + (5 * 60 - state.totalSeconds + " seconds");
                     writeText("SetsFound", text1);
                     writeText("TimeUsed", text2);
                 }
             }, 1000); // check every second
         }
     });
-
-
 
     //add listener to New Game button
     let newGameBtn = document.getElementById("NewGame");
@@ -299,7 +302,8 @@ window.onload = function () {
  *  
  * @returns
  *      
- * @calls
+ * @calls displayCards() 
+ * @calls setupClickListeners()
  */
 
 function startGameLoop() {
@@ -320,7 +324,11 @@ function startGameLoop() {
  *          this is the 12 cards that are displayed. card should be one of its element
  * @returns
  *      
- * @calls
+ * @calls  message() 
+ * @calls  startGameLoop()
+ * @calls  cardReplacing()
+ * @calls  writeText()
+ * @calls  showdiv()
  */
 
 export function cardClickListener(card, cards) {
@@ -360,8 +368,22 @@ export function cardClickListener(card, cards) {
             state.scoreNum += 1;
             displayScore(state.scoreNum);
             if (state.shuffledDeck.length === 0) {
-                //Need to be done
-                console.log("There is no card in shuffledDeck");
+                //inactive the game
+                state.gameIsActive = false;
+                //visible game summary and grey
+                showDiv();
+                let newGame2Btn = document.getElementById("NewGame2");
+                newGame2Btn.addEventListener("click", function () {
+                    //invisible the game summary and grey
+                    // hideDiv();
+                    location.reload(); //  "New Game" will refreash the whole page
+                });
+                //write the result
+                state.paused = true;
+                let text1 = "Sets Found:  " + state.scoreNum;
+                let text2 = "Time Used:  " + (5 * 60 - state.totalSeconds + " seconds");
+                writeText("SetsFound", text1);
+                writeText("TimeUsed", text2);
             } else {
                 //Avoid muti-listeners
                 cards.forEach(function (card) {
@@ -390,7 +412,7 @@ export function cardClickListener(card, cards) {
  * 
  * @returns
  *      
- * @calls
+ * @calls cardClickListener()
  */
 export function setupClickListeners() {
     const cards = document.querySelectorAll('.card-box');

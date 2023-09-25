@@ -1,5 +1,6 @@
 import {verifySet} from './verifySet.js';
 import {resetHints} from './hintGenerator.js';
+import {findAllSets} from './findSets.js';
 
 /**
  * Find set(s) in a given array of cards
@@ -64,9 +65,9 @@ export function cardReplacing(card1, card2, card3, cardsOnTable, shuffledDeck){
     // loop untill there is a set after replacing three new cards into the table
     while (checker == 0) {
         // three new cards from shuffled deck
-        let new_card1 = shuffledDeck.pop();
-        let new_card2 = shuffledDeck.pop();
-        let new_card3 = shuffledDeck.pop();
+        let new_card1 = shuffledDeck.shift();
+        let new_card2 = shuffledDeck.shift();
+        let new_card3 = shuffledDeck.shift();
 
         // replacing them with old three cards
         cardsOnTable[indexOf_card1] = new_card1;
@@ -76,7 +77,7 @@ export function cardReplacing(card1, card2, card3, cardsOnTable, shuffledDeck){
         console.log("3 new cards: ", new_card1, new_card2, new_card3);
 
         // if find a set, good. if not, push cards back to end of the shuffled deck 
-        if (findSet(cardsOnTable).length != 0){
+        if (findAllSets(cardsOnTable).length != 0){
             checker = 1;
         } else {
             shuffledDeck.push(new_card1, new_card2, new_card3);
