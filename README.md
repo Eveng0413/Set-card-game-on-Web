@@ -22,7 +22,7 @@ Before playing, click view rules. At the start of the game click the start game 
 
 As the game progresses, on the left panel the player can click the hint button and a hint will be given, helping the player find a set.
 
-Once the timer is finished the game ends or there is no more cards from the deck to replace, a game summary pannel will display the score and time it took to find the sets. Also, if the user wants to start a new game, the user should click the new game button on the game summary pannel button which takes the user to the main page and then click on start game for the second round to begin.
+Once the timer is finished the game ends or there are no more cards from the deck and all cards left are those on table, a game summary pannel will display the score and time it took to find the sets. Also, if the user wants to start a new game, the user should click the new game button on the game summary pannel button which takes the user to the main page and then click on start game for the second round to begin.
 
 
 
